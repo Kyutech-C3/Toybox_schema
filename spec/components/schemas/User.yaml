@@ -14,6 +14,7 @@ properties:
   name:
     title: Name
     type: string
+    example: user1
   display_name:
     title: Display Name
     type: string
