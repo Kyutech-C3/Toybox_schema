@@ -1,0 +1,12 @@
+title: Body_post_asset_api_v1_assets_post
+required:
+  - file
+  - asset_type
+type: object
+properties:
+  file:
+    title: File
+    type: string
+    format: binary
+  asset_type:
+    $ref: ./AssetType.yaml

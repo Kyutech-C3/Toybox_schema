@@ -1,0 +1,96 @@
+get:
+  tags:
+    - works
+  summary: Get Works
+  operationId: get_works_api_v1_works_get
+  parameters:
+    - required: false
+      schema:
+        title: Limit
+        type: integer
+        default: 30
+      name: limit
+      in: query
+    - required: false
+      schema:
+        $ref: ../components/schemas/Visibility.yaml
+      name: visibility
+      in: query
+    - required: false
+      schema:
+        title: Oldest Work Id
+        type: string
+      name: oldest_work_id
+      in: query
+    - required: false
+      schema:
+        title: Newest Work Id
+        type: string
+      name: newest_work_id
+      in: query
+    - required: false
+      schema:
+        title: Tag Names
+        type: string
+      name: tag_names
+      in: query
+    - required: false
+      schema:
+        title: Tag Ids
+        type: string
+      name: tag_ids
+      in: query
+    - required: false
+      schema:
+        title: Search Word
+        type: string
+      name: search_word
+      in: query
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ResWorks.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []
+post:
+  tags:
+    - works
+  summary: Post Work
+  operationId: post_work_api_v1_works_post
+  parameters:
+    - required: true
+      schema:
+        title: Post Discord
+        type: boolean
+      name: post_discord
+      in: query
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PostWork.yaml
+    required: true
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Work.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

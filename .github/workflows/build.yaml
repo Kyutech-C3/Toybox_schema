@@ -1,0 +1,43 @@
+name: Build
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+    build_and_merge:
+        permissions:
+            actions: write
+            checks: write
+            contents: write
+            deployments: write
+            issues: write
+            packages: write
+            pull-requests: write
+            repository-projects: write
+            security-events: write
+            statuses: write
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+              with:
+                  ref: ${{ github.head_ref }}
+
+            - name: Setup
+              uses: ./.github/actions/install
+
+            - name: Build
+              run: pnpm build
+
+            - name: Generate Redoc HTML
+              run: pnpm codegen
+
+            - name: Commit changes
+              run: |
+                  git config --global user.name "GitHub Actions Bot"
+                  git config --global user.email "<email@example.com>"
+                  git add -A
+                  git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generated build by GitHub Actions"
+                  git push origin ${{ github.head_ref }}

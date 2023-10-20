@@ -1,0 +1,14 @@
+title: ResWorks
+required:
+  - works
+  - works_total_count
+type: object
+properties:
+  works:
+    title: Works
+    type: array
+    items:
+      $ref: ./Work.yaml
+  works_total_count:
+    title: Works Total Count
+    type: integer

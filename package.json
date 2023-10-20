@@ -1,0 +1,22 @@
+{
+    "name": "openapi",
+    "version": "1.0.0",
+    "private": true,
+    "description": "toybox-schema",
+    "scripts": {
+        "build": "swagger-merger -i './spec/openapi.yml' -o ./build/openapi.yml",
+        "codegen": "redocly build-docs ./build/openapi.yml -o ./static/index.html",
+        "semantic-release": "semantic-release"
+    },
+    "devDependencies": {
+        "@redocly/cli": "^1.2.0",
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/git": "^10.0.1",
+        "@semantic-release/github": "^9.2.1",
+        "semantic-release": "^22.0.5",
+        "swagger-merger": "^1.5.4"
+    },
+    "volta": {
+        "node": "20.8.1"
+    }
+}

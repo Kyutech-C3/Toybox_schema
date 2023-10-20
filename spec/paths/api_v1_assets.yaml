@@ -1,0 +1,26 @@
+post:
+  tags:
+    - assets
+  summary: Post Asset
+  operationId: post_asset_api_v1_assets_post
+  requestBody:
+    content:
+      multipart/form-data:
+        schema:
+          $ref: ../components/schemas/Body_post_asset_api_v1_assets_post.yaml
+    required: true
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Asset.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

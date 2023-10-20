@@ -1,0 +1,87 @@
+get:
+  tags:
+    - works
+  summary: Get Work
+  operationId: get_work_api_v1_works__work_id__get
+  parameters:
+    - required: true
+      schema:
+        title: Work Id
+        type: string
+      name: work_id
+      in: path
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Work.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []
+put:
+  tags:
+    - works
+  summary: Put Work
+  operationId: put_work_api_v1_works__work_id__put
+  parameters:
+    - required: true
+      schema:
+        title: Work Id
+        type: string
+      name: work_id
+      in: path
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PostWork.yaml
+    required: true
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Work.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []
+delete:
+  tags:
+    - works
+  summary: Delete Work
+  operationId: delete_work_api_v1_works__work_id__delete
+  parameters:
+    - required: true
+      schema:
+        title: Work Id
+        type: string
+      name: work_id
+      in: path
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DeleteStatus.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

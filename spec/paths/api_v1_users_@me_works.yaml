@@ -1,0 +1,51 @@
+get:
+  tags:
+    - users
+  summary: Get My Works
+  operationId: get_my_works_api_v1_users__me_works_get
+  parameters:
+    - required: false
+      schema:
+        $ref: ../components/schemas/Visibility.yaml
+      name: visibility
+      in: query
+    - required: false
+      schema:
+        title: Oldest User Id
+        type: string
+      name: oldest_user_id
+      in: query
+    - required: false
+      schema:
+        title: Newest User Id
+        type: string
+      name: newest_user_id
+      in: query
+    - required: false
+      schema:
+        title: Tags
+        type: string
+      name: tags
+      in: query
+    - required: false
+      schema:
+        title: Limit
+        type: integer
+        default: 30
+      name: limit
+      in: query
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ResWorks.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

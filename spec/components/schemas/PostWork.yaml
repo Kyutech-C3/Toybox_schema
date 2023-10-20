@@ -1,0 +1,38 @@
+title: PostWork
+required:
+  - title
+  - description
+  - visibility
+  - thumbnail_asset_id
+  - assets_id
+  - urls
+  - tags_id
+type: object
+properties:
+  title:
+    title: Title
+    type: string
+  description:
+    title: Description
+    type: string
+  visibility:
+    title: Visibility
+    type: string
+  thumbnail_asset_id:
+    title: Thumbnail Asset Id
+    type: string
+  assets_id:
+    title: Assets Id
+    type: array
+    items:
+      type: string
+  urls:
+    title: Urls
+    type: array
+    items:
+      $ref: ./BaseUrlInfo.yaml
+  tags_id:
+    title: Tags Id
+    type: array
+    items:
+      type: string

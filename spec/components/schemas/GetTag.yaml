@@ -1,0 +1,16 @@
+title: GetTag
+required:
+  - name
+  - color
+  - id
+type: object
+properties:
+  name:
+    title: Name
+    type: string
+  color:
+    title: Color
+    type: string
+  id:
+    title: Id
+    type: string

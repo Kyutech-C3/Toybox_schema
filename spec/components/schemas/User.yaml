@@ -1,0 +1,41 @@
+title: User
+required:
+  - id
+  - name
+  - display_name
+  - created_at
+  - updated_at
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+  name:
+    title: Name
+    type: string
+  display_name:
+    title: Display Name
+    type: string
+  avatar_url:
+    title: Avatar Url
+    maxLength: 2083
+    minLength: 1
+    type: string
+    format: uri
+  profile:
+    title: Profile
+    type: string
+  twitter_id:
+    title: Twitter Id
+    type: string
+  github_id:
+    title: Github Id
+    type: string
+  created_at:
+    title: Created At
+    type: string
+    format: date-time
+  updated_at:
+    title: Updated At
+    type: string
+    format: date-time

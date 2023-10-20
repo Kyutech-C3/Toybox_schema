@@ -1,0 +1,30 @@
+get:
+  tags:
+    - users
+  summary: Favorite By User Id
+  operationId: favorite_by_user_id_api_v1_users__user_id__favorite_get
+  parameters:
+    - required: true
+      schema:
+        title: User Id
+        type: string
+      name: user_id
+      in: path
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            title: Response Favorite By User Id Api V1 Users  User Id  Favorite Get
+            type: array
+            items:
+              $ref: ../components/schemas/Work.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

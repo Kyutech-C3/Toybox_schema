@@ -1,0 +1,85 @@
+get:
+  tags:
+    - tags
+  summary: Tag By Id
+  operationId: tag_by_id_api_v1_tags__tag_id__get
+  parameters:
+    - required: true
+      schema:
+        title: Tag Id
+        type: string
+      name: tag_id
+      in: path
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetTag.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+put:
+  tags:
+    - tags
+  summary: Tag By Id
+  operationId: tag_by_id_api_v1_tags__tag_id__put
+  parameters:
+    - required: true
+      schema:
+        title: Tag Id
+        type: string
+      name: tag_id
+      in: path
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PutTag.yaml
+    required: true
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetTag.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []
+delete:
+  tags:
+    - tags
+  summary: Tag By Id
+  operationId: tag_by_id_api_v1_tags__tag_id__delete
+  parameters:
+    - required: true
+      schema:
+        title: Tag Id
+        type: string
+      name: tag_id
+      in: path
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TagResponsStatus.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

@@ -1,0 +1,26 @@
+get:
+  tags:
+    - auth
+  summary: Discord Callback
+  operationId: discord_callback_api_v1_auth_discord_callback_get
+  parameters:
+    - required: false
+      schema:
+        title: Code
+        type: string
+        default: ''
+      name: code
+      in: query
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TokenResponse.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml

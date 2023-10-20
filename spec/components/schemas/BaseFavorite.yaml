@@ -1,0 +1,15 @@
+title: BaseFavorite
+required:
+  - work
+  - user
+  - created_at
+type: object
+properties:
+  work:
+    $ref: ./Work.yaml
+  user:
+    $ref: ./User.yaml
+  created_at:
+    title: Created At
+    type: string
+    format: date-time

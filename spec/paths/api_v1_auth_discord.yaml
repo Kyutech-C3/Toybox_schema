@@ -1,0 +1,11 @@
+get:
+  tags:
+    - auth
+  summary: Discord Login Redirect
+  operationId: discord_login_redirect_api_v1_auth_discord_get
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema: {}

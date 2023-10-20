@@ -1,0 +1,90 @@
+get:
+  tags:
+    - works
+  summary: Get Reply Comments
+  operationId: get_reply_comments_api_v1_works__work_id__comments__comment_id__get
+  parameters:
+    - required: true
+      schema:
+        title: Work Id
+        type: string
+      name: work_id
+      in: path
+    - required: true
+      schema:
+        title: Comment Id
+        type: string
+      name: comment_id
+      in: path
+    - required: false
+      schema:
+        title: Limit
+        type: integer
+        default: 10
+      name: limit
+      in: query
+    - required: false
+      schema:
+        title: Oldest Comment Id
+        type: string
+      name: oldest_comment_id
+      in: query
+    - required: false
+      schema:
+        title: Newest Comment Id
+        type: string
+      name: newest_comment_id
+      in: query
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            title: >-
+              Response Get Reply Comments Api V1 Works  Work Id  Comments 
+              Comment Id  Get
+            type: array
+            items:
+              $ref: ../components/schemas/ResponseReplyComment.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []
+delete:
+  tags:
+    - works
+  summary: Delete Comment
+  operationId: delete_comment_api_v1_works__work_id__comments__comment_id__delete
+  parameters:
+    - required: true
+      schema:
+        title: Comment Id
+        type: string
+      name: comment_id
+      in: path
+    - required: true
+      schema:
+        title: Work Id
+        type: string
+      name: work_id
+      in: path
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DeleteStatus.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

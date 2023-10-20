@@ -1,0 +1,29 @@
+title: UrlInfo
+required:
+  - url
+  - url_type
+  - id
+  - user
+  - created_at
+  - updated_at
+type: object
+properties:
+  url:
+    title: Url
+    type: string
+  url_type:
+    title: Url Type
+    type: string
+  id:
+    title: Id
+    type: string
+  user:
+    $ref: ./User.yaml
+  created_at:
+    title: Created At
+    type: string
+    format: date-time
+  updated_at:
+    title: Updated At
+    type: string
+    format: date-time

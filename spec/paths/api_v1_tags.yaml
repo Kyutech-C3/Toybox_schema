@@ -1,0 +1,73 @@
+get:
+  tags:
+    - tags
+  summary: Tags All
+  operationId: tags_all_api_v1_tags_get
+  parameters:
+    - required: false
+      schema:
+        title: Limit
+        type: integer
+        default: 100
+      name: limit
+      in: query
+    - required: false
+      schema:
+        title: Smallest Tag Id
+        type: string
+      name: smallest_tag_id
+      in: query
+    - required: false
+      schema:
+        title: Biggest Tag Id
+        type: string
+      name: biggest_tag_id
+      in: query
+    - required: false
+      schema:
+        title: W
+        type: string
+      name: w
+      in: query
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            title: Response Tags All Api V1 Tags Get
+            type: array
+            items:
+              $ref: ../components/schemas/GetTag.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+post:
+  tags:
+    - tags
+  summary: Post Tag
+  operationId: post_tag_api_v1_tags_post
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PostTag.yaml
+    required: true
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetTag.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

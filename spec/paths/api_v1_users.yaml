@@ -1,0 +1,41 @@
+get:
+  tags:
+    - users
+  summary: Get User List
+  operationId: get_user_list_api_v1_users_get
+  parameters:
+    - required: false
+      schema:
+        title: Limit
+        type: integer
+        default: 30
+      name: limit
+      in: query
+    - required: false
+      schema:
+        title: Oldest User Id
+        type: string
+      name: oldest_user_id
+      in: query
+    - required: false
+      schema:
+        title: Newest User Id
+        type: string
+      name: newest_user_id
+      in: query
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            title: Response Get User List Api V1 Users Get
+            type: array
+            items:
+              $ref: ../components/schemas/User.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml

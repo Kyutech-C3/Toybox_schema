@@ -1,0 +1,81 @@
+get:
+  tags:
+    - works
+  summary: Favorite By Work Id
+  operationId: favorite_by_work_id_api_v1_works__work_id__favorite_get
+  parameters:
+    - required: true
+      schema:
+        title: Work Id
+        type: string
+      name: work_id
+      in: path
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Favorite.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []
+post:
+  tags:
+    - works
+  summary: Post Favorite
+  operationId: post_favorite_api_v1_works__work_id__favorite_post
+  parameters:
+    - required: true
+      schema:
+        title: Work Id
+        type: string
+      name: work_id
+      in: path
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Favorite.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []
+delete:
+  tags:
+    - works
+  summary: Delete Favorite
+  operationId: delete_favorite_api_v1_works__work_id__favorite_delete
+  parameters:
+    - required: true
+      schema:
+        title: Work Id
+        type: string
+      name: work_id
+      in: path
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Favorite.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

@@ -1,0 +1,8 @@
+title: RefreshTokenExchangeRequest
+required:
+  - refresh_token
+type: object
+properties:
+  refresh_token:
+    title: Refresh Token
+    type: string

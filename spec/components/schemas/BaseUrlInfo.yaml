@@ -1,0 +1,12 @@
+title: BaseUrlInfo
+required:
+  - url
+  - url_type
+type: object
+properties:
+  url:
+    title: Url
+    type: string
+  url_type:
+    title: Url Type
+    type: string

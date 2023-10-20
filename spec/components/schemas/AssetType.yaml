@@ -1,0 +1,9 @@
+title: AssetType
+enum:
+  - zip
+  - image
+  - video
+  - music
+  - model
+type: string
+description: An enumeration.

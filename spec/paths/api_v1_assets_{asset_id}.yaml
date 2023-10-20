@@ -1,0 +1,27 @@
+delete:
+  tags:
+    - assets
+  summary: Delete Asset
+  operationId: delete_asset_api_v1_assets__asset_id__delete
+  parameters:
+    - required: true
+      schema:
+        title: Asset Id
+        type: string
+      name: asset_id
+      in: path
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DeleteStatus.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

@@ -1,0 +1,1592 @@
+openapi: 3.0.2
+info:
+    title: toybox-server
+    version: 0.1.0
+paths:
+    /api/v1/auth/sign_up:
+        post:
+            tags:
+                - auth
+            summary: Sign Up
+            operationId: sign_up_api_v1_auth_sign_up_post
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/UserCreateRequest"
+                required: true
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/User"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+    /api/v1/auth/token:
+        post:
+            tags:
+                - auth
+            summary: Refresh Token Exchange
+            operationId: refresh_token_exchange_api_v1_auth_token_post
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/RefreshTokenExchangeRequest"
+                required: true
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/TokenResponse"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+    /api/v1/auth/discord:
+        get:
+            tags:
+                - auth
+            summary: Discord Login Redirect
+            operationId: discord_login_redirect_api_v1_auth_discord_get
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema: {}
+    /api/v1/auth/discord/callback:
+        get:
+            tags:
+                - auth
+            summary: Discord Callback
+            operationId: discord_callback_api_v1_auth_discord_callback_get
+            parameters:
+                - required: false
+                  schema:
+                      title: Code
+                      type: string
+                      default: ""
+                  name: code
+                  in: query
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/TokenResponse"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+    /api/v1/users/@me:
+        get:
+            tags:
+                - users
+            summary: Get Me
+            operationId: get_me_api_v1_users__me_get
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/User"
+            security:
+                - HTTPBearer: []
+        put:
+            tags:
+                - users
+            summary: Put User Info
+            operationId: put_user_info_api_v1_users__me_put
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/UserInfoChangeRequest"
+                required: true
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/User"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/users/{user_id}:
+        get:
+            tags:
+                - users
+            summary: Get User
+            operationId: get_user_api_v1_users__user_id__get
+            parameters:
+                - required: true
+                  schema:
+                      title: User Id
+                      type: string
+                  name: user_id
+                  in: path
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/User"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+    /api/v1/users:
+        get:
+            tags:
+                - users
+            summary: Get User List
+            operationId: get_user_list_api_v1_users_get
+            parameters:
+                - required: false
+                  schema:
+                      title: Limit
+                      type: integer
+                      default: 30
+                  name: limit
+                  in: query
+                - required: false
+                  schema:
+                      title: Oldest User Id
+                      type: string
+                  name: oldest_user_id
+                  in: query
+                - required: false
+                  schema:
+                      title: Newest User Id
+                      type: string
+                  name: newest_user_id
+                  in: query
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                title: Response Get User List Api V1 Users Get
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/User"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+    /api/v1/users/@me/works:
+        get:
+            tags:
+                - users
+            summary: Get My Works
+            operationId: get_my_works_api_v1_users__me_works_get
+            parameters:
+                - required: false
+                  schema:
+                      $ref: "#/components/schemas/Visibility"
+                  name: visibility
+                  in: query
+                - required: false
+                  schema:
+                      title: Oldest User Id
+                      type: string
+                  name: oldest_user_id
+                  in: query
+                - required: false
+                  schema:
+                      title: Newest User Id
+                      type: string
+                  name: newest_user_id
+                  in: query
+                - required: false
+                  schema:
+                      title: Tags
+                      type: string
+                  name: tags
+                  in: query
+                - required: false
+                  schema:
+                      title: Limit
+                      type: integer
+                      default: 30
+                  name: limit
+                  in: query
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ResWorks"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/users/{user_id}/works:
+        get:
+            tags:
+                - users
+            summary: Get Users Works
+            operationId: get_users_works_api_v1_users__user_id__works_get
+            parameters:
+                - required: true
+                  schema:
+                      title: User Id
+                      type: string
+                  name: user_id
+                  in: path
+                - required: false
+                  schema:
+                      title: Oldest User Id
+                      type: string
+                  name: oldest_user_id
+                  in: query
+                - required: false
+                  schema:
+                      title: Newest User Id
+                      type: string
+                  name: newest_user_id
+                  in: query
+                - required: false
+                  schema:
+                      title: Limit
+                      type: integer
+                      default: 30
+                  name: limit
+                  in: query
+                - required: false
+                  schema:
+                      title: Tags
+                      type: string
+                  name: tags
+                  in: query
+                - required: false
+                  schema:
+                      $ref: "#/components/schemas/Visibility"
+                  name: visibility
+                  in: query
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ResWorks"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/users/@me/favorite:
+        get:
+            tags:
+                - users
+            summary: Favorite By User Id
+            operationId: favorite_by_user_id_api_v1_users__me_favorite_get
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                title: Response Favorite By User Id Api V1 Users  Me Favorite Get
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Work"
+            security:
+                - HTTPBearer: []
+    /api/v1/users/{user_id}/favorite:
+        get:
+            tags:
+                - users
+            summary: Favorite By User Id
+            operationId: favorite_by_user_id_api_v1_users__user_id__favorite_get
+            parameters:
+                - required: true
+                  schema:
+                      title: User Id
+                      type: string
+                  name: user_id
+                  in: path
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                title: Response Favorite By User Id Api V1 Users  User Id  Favorite Get
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Work"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/tags:
+        get:
+            tags:
+                - tags
+            summary: Tags All
+            operationId: tags_all_api_v1_tags_get
+            parameters:
+                - required: false
+                  schema:
+                      title: Limit
+                      type: integer
+                      default: 100
+                  name: limit
+                  in: query
+                - required: false
+                  schema:
+                      title: Smallest Tag Id
+                      type: string
+                  name: smallest_tag_id
+                  in: query
+                - required: false
+                  schema:
+                      title: Biggest Tag Id
+                      type: string
+                  name: biggest_tag_id
+                  in: query
+                - required: false
+                  schema:
+                      title: W
+                      type: string
+                  name: w
+                  in: query
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                title: Response Tags All Api V1 Tags Get
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/GetTag"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+        post:
+            tags:
+                - tags
+            summary: Post Tag
+            operationId: post_tag_api_v1_tags_post
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/PostTag"
+                required: true
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/GetTag"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/tags/{tag_id}:
+        get:
+            tags:
+                - tags
+            summary: Tag By Id
+            operationId: tag_by_id_api_v1_tags__tag_id__get
+            parameters:
+                - required: true
+                  schema:
+                      title: Tag Id
+                      type: string
+                  name: tag_id
+                  in: path
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/GetTag"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+        put:
+            tags:
+                - tags
+            summary: Tag By Id
+            operationId: tag_by_id_api_v1_tags__tag_id__put
+            parameters:
+                - required: true
+                  schema:
+                      title: Tag Id
+                      type: string
+                  name: tag_id
+                  in: path
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/PutTag"
+                required: true
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/GetTag"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+        delete:
+            tags:
+                - tags
+            summary: Tag By Id
+            operationId: tag_by_id_api_v1_tags__tag_id__delete
+            parameters:
+                - required: true
+                  schema:
+                      title: Tag Id
+                      type: string
+                  name: tag_id
+                  in: path
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/TagResponsStatus"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/works:
+        get:
+            tags:
+                - works
+            summary: Get Works
+            operationId: get_works_api_v1_works_get
+            parameters:
+                - required: false
+                  schema:
+                      title: Limit
+                      type: integer
+                      default: 30
+                  name: limit
+                  in: query
+                - required: false
+                  schema:
+                      $ref: "#/components/schemas/Visibility"
+                  name: visibility
+                  in: query
+                - required: false
+                  schema:
+                      title: Oldest Work Id
+                      type: string
+                  name: oldest_work_id
+                  in: query
+                - required: false
+                  schema:
+                      title: Newest Work Id
+                      type: string
+                  name: newest_work_id
+                  in: query
+                - required: false
+                  schema:
+                      title: Tag Names
+                      type: string
+                  name: tag_names
+                  in: query
+                - required: false
+                  schema:
+                      title: Tag Ids
+                      type: string
+                  name: tag_ids
+                  in: query
+                - required: false
+                  schema:
+                      title: Search Word
+                      type: string
+                  name: search_word
+                  in: query
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ResWorks"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+        post:
+            tags:
+                - works
+            summary: Post Work
+            operationId: post_work_api_v1_works_post
+            parameters:
+                - required: true
+                  schema:
+                      title: Post Discord
+                      type: boolean
+                  name: post_discord
+                  in: query
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/PostWork"
+                required: true
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Work"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/works/{work_id}:
+        get:
+            tags:
+                - works
+            summary: Get Work
+            operationId: get_work_api_v1_works__work_id__get
+            parameters:
+                - required: true
+                  schema:
+                      title: Work Id
+                      type: string
+                  name: work_id
+                  in: path
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Work"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+        put:
+            tags:
+                - works
+            summary: Put Work
+            operationId: put_work_api_v1_works__work_id__put
+            parameters:
+                - required: true
+                  schema:
+                      title: Work Id
+                      type: string
+                  name: work_id
+                  in: path
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/PostWork"
+                required: true
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Work"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+        delete:
+            tags:
+                - works
+            summary: Delete Work
+            operationId: delete_work_api_v1_works__work_id__delete
+            parameters:
+                - required: true
+                  schema:
+                      title: Work Id
+                      type: string
+                  name: work_id
+                  in: path
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/DeleteStatus"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/works/{work_id}/comments:
+        get:
+            tags:
+                - works
+            summary: Get Comments
+            operationId: get_comments_api_v1_works__work_id__comments_get
+            parameters:
+                - required: true
+                  schema:
+                      title: Work Id
+                      type: string
+                  name: work_id
+                  in: path
+                - required: false
+                  schema:
+                      title: Limit
+                      type: integer
+                      default: 30
+                  name: limit
+                  in: query
+                - required: false
+                  schema:
+                      title: Oldest Comment Id
+                      type: string
+                  name: oldest_comment_id
+                  in: query
+                - required: false
+                  schema:
+                      title: Newest Comment Id
+                      type: string
+                  name: newest_comment_id
+                  in: query
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                title: Response Get Comments Api V1 Works  Work Id  Comments Get
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/ResponseComment"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+        post:
+            tags:
+                - works
+            summary: Post Comment
+            operationId: post_comment_api_v1_works__work_id__comments_post
+            parameters:
+                - required: true
+                  schema:
+                      title: Work Id
+                      type: string
+                  name: work_id
+                  in: path
+                - required: false
+                  schema:
+                      title: Reply At
+                      type: string
+                  name: reply_at
+                  in: query
+                - required: false
+                  schema:
+                      allOf:
+                          - $ref: "#/components/schemas/Visibility"
+                      default: public
+                  name: visibility
+                  in: query
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/PostComment"
+                required: true
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ResponseComment"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/works/{work_id}/comments/{comment_id}:
+        get:
+            tags:
+                - works
+            summary: Get Reply Comments
+            operationId: get_reply_comments_api_v1_works__work_id__comments__comment_id__get
+            parameters:
+                - required: true
+                  schema:
+                      title: Work Id
+                      type: string
+                  name: work_id
+                  in: path
+                - required: true
+                  schema:
+                      title: Comment Id
+                      type: string
+                  name: comment_id
+                  in: path
+                - required: false
+                  schema:
+                      title: Limit
+                      type: integer
+                      default: 10
+                  name: limit
+                  in: query
+                - required: false
+                  schema:
+                      title: Oldest Comment Id
+                      type: string
+                  name: oldest_comment_id
+                  in: query
+                - required: false
+                  schema:
+                      title: Newest Comment Id
+                      type: string
+                  name: newest_comment_id
+                  in: query
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                title: Response Get Reply Comments Api V1 Works  Work Id  Comments  Comment Id  Get
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/ResponseReplyComment"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+        delete:
+            tags:
+                - works
+            summary: Delete Comment
+            operationId: delete_comment_api_v1_works__work_id__comments__comment_id__delete
+            parameters:
+                - required: true
+                  schema:
+                      title: Comment Id
+                      type: string
+                  name: comment_id
+                  in: path
+                - required: true
+                  schema:
+                      title: Work Id
+                      type: string
+                  name: work_id
+                  in: path
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/DeleteStatus"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/works/{work_id}/favorite:
+        get:
+            tags:
+                - works
+            summary: Favorite By Work Id
+            operationId: favorite_by_work_id_api_v1_works__work_id__favorite_get
+            parameters:
+                - required: true
+                  schema:
+                      title: Work Id
+                      type: string
+                  name: work_id
+                  in: path
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Favorite"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+        post:
+            tags:
+                - works
+            summary: Post Favorite
+            operationId: post_favorite_api_v1_works__work_id__favorite_post
+            parameters:
+                - required: true
+                  schema:
+                      title: Work Id
+                      type: string
+                  name: work_id
+                  in: path
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Favorite"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+        delete:
+            tags:
+                - works
+            summary: Delete Favorite
+            operationId: delete_favorite_api_v1_works__work_id__favorite_delete
+            parameters:
+                - required: true
+                  schema:
+                      title: Work Id
+                      type: string
+                  name: work_id
+                  in: path
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Favorite"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/assets:
+        post:
+            tags:
+                - assets
+            summary: Post Asset
+            operationId: post_asset_api_v1_assets_post
+            requestBody:
+                content:
+                    multipart/form-data:
+                        schema:
+                            $ref: "#/components/schemas/Body_post_asset_api_v1_assets_post"
+                required: true
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Asset"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+    /api/v1/assets/{asset_id}:
+        delete:
+            tags:
+                - assets
+            summary: Delete Asset
+            operationId: delete_asset_api_v1_assets__asset_id__delete
+            parameters:
+                - required: true
+                  schema:
+                      title: Asset Id
+                      type: string
+                  name: asset_id
+                  in: path
+            responses:
+                "200":
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/DeleteStatus"
+                "422":
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/HTTPValidationError"
+            security:
+                - HTTPBearer: []
+components:
+    schemas:
+        Asset:
+            title: Asset
+            required:
+                - asset_type
+                - id
+                - user
+                - extension
+                - url
+                - created_at
+                - updated_at
+            type: object
+            properties:
+                asset_type:
+                    title: Asset Type
+                    type: string
+                id:
+                    title: Id
+                    type: string
+                user:
+                    $ref: "#/components/schemas/User"
+                extension:
+                    title: Extension
+                    type: string
+                url:
+                    title: Url
+                    type: string
+                created_at:
+                    title: Created At
+                    type: string
+                    format: date-time
+                updated_at:
+                    title: Updated At
+                    type: string
+                    format: date-time
+        AssetType:
+            title: AssetType
+            enum:
+                - zip
+                - image
+                - video
+                - music
+                - model
+            type: string
+            description: An enumeration.
+        BaseFavorite:
+            title: BaseFavorite
+            required:
+                - work
+                - user
+                - created_at
+            type: object
+            properties:
+                work:
+                    $ref: "#/components/schemas/Work"
+                user:
+                    $ref: "#/components/schemas/User"
+                created_at:
+                    title: Created At
+                    type: string
+                    format: date-time
+        BaseUrlInfo:
+            title: BaseUrlInfo
+            required:
+                - url
+                - url_type
+            type: object
+            properties:
+                url:
+                    title: Url
+                    type: string
+                url_type:
+                    title: Url Type
+                    type: string
+        Body_post_asset_api_v1_assets_post:
+            title: Body_post_asset_api_v1_assets_post
+            required:
+                - file
+                - asset_type
+            type: object
+            properties:
+                file:
+                    title: File
+                    type: string
+                    format: binary
+                asset_type:
+                    $ref: "#/components/schemas/AssetType"
+        DeleteStatus:
+            title: DeleteStatus
+            required:
+                - status
+            type: object
+            properties:
+                status:
+                    title: Status
+                    type: string
+        Favorite:
+            title: Favorite
+            required:
+                - favorites
+                - is_favorite
+                - favorite_count
+            type: object
+            properties:
+                favorites:
+                    title: Favorites
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/BaseFavorite"
+                is_favorite:
+                    title: Is Favorite
+                    type: boolean
+                favorite_count:
+                    title: Favorite Count
+                    type: integer
+        GetTag:
+            title: GetTag
+            required:
+                - name
+                - color
+                - id
+            type: object
+            properties:
+                name:
+                    title: Name
+                    type: string
+                color:
+                    title: Color
+                    type: string
+                id:
+                    title: Id
+                    type: string
+        HTTPValidationError:
+            title: HTTPValidationError
+            type: object
+            properties:
+                detail:
+                    title: Detail
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/ValidationError"
+        PostComment:
+            title: PostComment
+            required:
+                - content
+            type: object
+            properties:
+                content:
+                    title: 投稿内容
+                    maxLength: 500
+                    minLength: 1
+                    type: string
+        PostTag:
+            title: PostTag
+            required:
+                - name
+                - color
+            type: object
+            properties:
+                name:
+                    title: Name
+                    type: string
+                color:
+                    title: Color
+                    type: string
+        PostWork:
+            title: PostWork
+            required:
+                - title
+                - description
+                - visibility
+                - thumbnail_asset_id
+                - assets_id
+                - urls
+                - tags_id
+            type: object
+            properties:
+                title:
+                    title: Title
+                    type: string
+                description:
+                    title: Description
+                    type: string
+                visibility:
+                    title: Visibility
+                    type: string
+                thumbnail_asset_id:
+                    title: Thumbnail Asset Id
+                    type: string
+                assets_id:
+                    title: Assets Id
+                    type: array
+                    items:
+                        type: string
+                urls:
+                    title: Urls
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/BaseUrlInfo"
+                tags_id:
+                    title: Tags Id
+                    type: array
+                    items:
+                        type: string
+        PutTag:
+            title: PutTag
+            type: object
+            properties:
+                name:
+                    title: Name
+                    type: string
+                color:
+                    title: Color
+                    type: string
+        RefreshTokenExchangeRequest:
+            title: RefreshTokenExchangeRequest
+            required:
+                - refresh_token
+            type: object
+            properties:
+                refresh_token:
+                    title: Refresh Token
+                    type: string
+        ResWorks:
+            title: ResWorks
+            required:
+                - works
+                - works_total_count
+            type: object
+            properties:
+                works:
+                    title: Works
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/Work"
+                works_total_count:
+                    title: Works Total Count
+                    type: integer
+        ResponseComment:
+            title: ResponseComment
+            required:
+                - content
+                - id
+                - work_id
+                - created_at
+                - updated_at
+                - number_of_reply
+            type: object
+            properties:
+                content:
+                    title: 投稿内容
+                    maxLength: 500
+                    minLength: 1
+                    type: string
+                id:
+                    title: Id
+                    type: string
+                user:
+                    $ref: "#/components/schemas/User"
+                work_id:
+                    title: Work Id
+                    type: string
+                visibility:
+                    title: Visibility
+                    type: string
+                reply_at:
+                    title: Reply At
+                    type: string
+                created_at:
+                    title: Created At
+                    type: string
+                    format: date-time
+                updated_at:
+                    title: Updated At
+                    type: string
+                    format: date-time
+                number_of_reply:
+                    title: Number Of Reply
+                    type: integer
+        ResponseReplyComment:
+            title: ResponseReplyComment
+            required:
+                - content
+                - id
+                - work_id
+                - created_at
+                - updated_at
+            type: object
+            properties:
+                content:
+                    title: 投稿内容
+                    maxLength: 500
+                    minLength: 1
+                    type: string
+                id:
+                    title: Id
+                    type: string
+                user:
+                    $ref: "#/components/schemas/User"
+                work_id:
+                    title: Work Id
+                    type: string
+                visibility:
+                    title: Visibility
+                    type: string
+                reply_at:
+                    title: Reply At
+                    type: string
+                created_at:
+                    title: Created At
+                    type: string
+                    format: date-time
+                updated_at:
+                    title: Updated At
+                    type: string
+                    format: date-time
+        TagResponsStatus:
+            title: TagResponsStatus
+            required:
+                - status
+            type: object
+            properties:
+                status:
+                    title: Status
+                    type: string
+        TokenResponse:
+            title: TokenResponse
+            required:
+                - expired_at
+                - refresh_token
+                - access_token
+            type: object
+            properties:
+                expired_at:
+                    title: Expired At
+                    type: string
+                refresh_token:
+                    title: Refresh Token
+                    type: string
+                access_token:
+                    title: Access Token
+                    type: string
+        UrlInfo:
+            title: UrlInfo
+            required:
+                - url
+                - url_type
+                - id
+                - user
+                - created_at
+                - updated_at
+            type: object
+            properties:
+                url:
+                    title: Url
+                    type: string
+                url_type:
+                    title: Url Type
+                    type: string
+                id:
+                    title: Id
+                    type: string
+                user:
+                    $ref: "#/components/schemas/User"
+                created_at:
+                    title: Created At
+                    type: string
+                    format: date-time
+                updated_at:
+                    title: Updated At
+                    type: string
+                    format: date-time
+        User:
+            title: User
+            required:
+                - id
+                - name
+                - display_name
+                - created_at
+                - updated_at
+            type: object
+            properties:
+                id:
+                    title: Id
+                    type: string
+                name:
+                    title: Name
+                    type: string
+                display_name:
+                    title: Display Name
+                    type: string
+                avatar_url:
+                    title: Avatar Url
+                    maxLength: 2083
+                    minLength: 1
+                    type: string
+                    format: uri
+                profile:
+                    title: Profile
+                    type: string
+                twitter_id:
+                    title: Twitter Id
+                    type: string
+                github_id:
+                    title: Github Id
+                    type: string
+                created_at:
+                    title: Created At
+                    type: string
+                    format: date-time
+                updated_at:
+                    title: Updated At
+                    type: string
+                    format: date-time
+        UserCreateRequest:
+            title: UserCreateRequest
+            required:
+                - name
+                - email
+                - password
+                - display_name
+            type: object
+            properties:
+                name:
+                    title: Name
+                    type: string
+                email:
+                    title: Email
+                    type: string
+                    format: email
+                password:
+                    title: Password
+                    type: string
+                display_name:
+                    title: Display Name
+                    type: string
+                avatar_url:
+                    title: Avatar Url
+                    maxLength: 2083
+                    minLength: 1
+                    type: string
+                    format: uri
+        UserInfoChangeRequest:
+            title: UserInfoChangeRequest
+            type: object
+            properties:
+                display_name:
+                    title: Display Name
+                    type: string
+                avatar_url:
+                    title: Avatar Url
+                    maxLength: 2083
+                    minLength: 1
+                    type: string
+                    format: uri
+                profile:
+                    title: Profile
+                    type: string
+                twitter_id:
+                    title: Twitter Id
+                    type: string
+                github_id:
+                    title: Github Id
+                    type: string
+        ValidationError:
+            title: ValidationError
+            required:
+                - loc
+                - msg
+                - type
+            type: object
+            properties:
+                loc:
+                    title: Location
+                    type: array
+                    items:
+                        anyOf:
+                            - type: string
+                            - type: integer
+                msg:
+                    title: Message
+                    type: string
+                type:
+                    title: Error Type
+                    type: string
+        Visibility:
+            title: Visibility
+            enum:
+                - public
+                - private
+                - draft
+            type: string
+            description: An enumeration.
+        Work:
+            title: Work
+            required:
+                - id
+                - title
+                - description
+                - description_html
+                - user
+                - assets
+                - urls
+                - visibility
+                - tags
+                - thumbnail
+                - created_at
+                - updated_at
+            type: object
+            properties:
+                id:
+                    title: Id
+                    type: string
+                title:
+                    title: Title
+                    type: string
+                description:
+                    title: Description
+                    type: string
+                description_html:
+                    title: Description Html
+                    type: string
+                user:
+                    $ref: "#/components/schemas/User"
+                assets:
+                    title: Assets
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/Asset"
+                urls:
+                    title: Urls
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/UrlInfo"
+                visibility:
+                    title: Visibility
+                    type: string
+                tags:
+                    title: Tags
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/GetTag"
+                thumbnail:
+                    $ref: "#/components/schemas/Asset"
+                favorite_count:
+                    title: Favorite Count
+                    type: integer
+                is_favorite:
+                    title: Is Favorite
+                    type: boolean
+                created_at:
+                    title: Created At
+                    type: string
+                    format: date-time
+                updated_at:
+                    title: Updated At
+                    type: string
+                    format: date-time
+    securitySchemes:
+        HTTPBearer:
+            type: http
+            scheme: bearer

@@ -1,0 +1,95 @@
+get:
+  tags:
+    - works
+  summary: Get Comments
+  operationId: get_comments_api_v1_works__work_id__comments_get
+  parameters:
+    - required: true
+      schema:
+        title: Work Id
+        type: string
+      name: work_id
+      in: path
+    - required: false
+      schema:
+        title: Limit
+        type: integer
+        default: 30
+      name: limit
+      in: query
+    - required: false
+      schema:
+        title: Oldest Comment Id
+        type: string
+      name: oldest_comment_id
+      in: query
+    - required: false
+      schema:
+        title: Newest Comment Id
+        type: string
+      name: newest_comment_id
+      in: query
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            title: Response Get Comments Api V1 Works  Work Id  Comments Get
+            type: array
+            items:
+              $ref: ../components/schemas/ResponseComment.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []
+post:
+  tags:
+    - works
+  summary: Post Comment
+  operationId: post_comment_api_v1_works__work_id__comments_post
+  parameters:
+    - required: true
+      schema:
+        title: Work Id
+        type: string
+      name: work_id
+      in: path
+    - required: false
+      schema:
+        title: Reply At
+        type: string
+      name: reply_at
+      in: query
+    - required: false
+      schema:
+        allOf:
+          - $ref: ../components/schemas/Visibility.yaml
+        default: public
+      name: visibility
+      in: query
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PostComment.yaml
+    required: true
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ResponseComment.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

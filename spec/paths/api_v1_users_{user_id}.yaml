@@ -1,0 +1,25 @@
+get:
+  tags:
+    - users
+  summary: Get User
+  operationId: get_user_api_v1_users__user_id__get
+  parameters:
+    - required: true
+      schema:
+        title: User Id
+        type: string
+      name: user_id
+      in: path
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml

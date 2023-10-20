@@ -1,0 +1,40 @@
+get:
+  tags:
+    - users
+  summary: Get Me
+  operationId: get_me_api_v1_users__me_get
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+  security:
+    - HTTPBearer: []
+put:
+  tags:
+    - users
+  summary: Put User Info
+  operationId: put_user_info_api_v1_users__me_put
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UserInfoChangeRequest.yaml
+    required: true
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml
+  security:
+    - HTTPBearer: []

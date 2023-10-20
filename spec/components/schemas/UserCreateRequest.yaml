@@ -1,0 +1,27 @@
+title: UserCreateRequest
+required:
+  - name
+  - email
+  - password
+  - display_name
+type: object
+properties:
+  name:
+    title: Name
+    type: string
+  email:
+    title: Email
+    type: string
+    format: email
+  password:
+    title: Password
+    type: string
+  display_name:
+    title: Display Name
+    type: string
+  avatar_url:
+    title: Avatar Url
+    maxLength: 2083
+    minLength: 1
+    type: string
+    format: uri

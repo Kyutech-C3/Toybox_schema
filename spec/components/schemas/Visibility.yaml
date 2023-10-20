@@ -1,0 +1,7 @@
+title: Visibility
+enum:
+  - public
+  - private
+  - draft
+type: string
+description: An enumeration.

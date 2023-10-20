@@ -1,0 +1,36 @@
+title: ResponseReplyComment
+required:
+  - content
+  - id
+  - work_id
+  - created_at
+  - updated_at
+type: object
+properties:
+  content:
+    title: 投稿内容
+    maxLength: 500
+    minLength: 1
+    type: string
+  id:
+    title: Id
+    type: string
+  user:
+    $ref: ./User.yaml
+  work_id:
+    title: Work Id
+    type: string
+  visibility:
+    title: Visibility
+    type: string
+  reply_at:
+    title: Reply At
+    type: string
+  created_at:
+    title: Created At
+    type: string
+    format: date-time
+  updated_at:
+    title: Updated At
+    type: string
+    format: date-time

@@ -1,0 +1,24 @@
+post:
+  tags:
+    - auth
+  summary: Sign Up
+  operationId: sign_up_api_v1_auth_sign_up_post
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UserCreateRequest.yaml
+    required: true
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '422':
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HTTPValidationError.yaml

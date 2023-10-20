@@ -1,0 +1,33 @@
+title: Asset
+required:
+  - asset_type
+  - id
+  - user
+  - extension
+  - url
+  - created_at
+  - updated_at
+type: object
+properties:
+  asset_type:
+    title: Asset Type
+    type: string
+  id:
+    title: Id
+    type: string
+  user:
+    $ref: ./User.yaml
+  extension:
+    title: Extension
+    type: string
+  url:
+    title: Url
+    type: string
+  created_at:
+    title: Created At
+    type: string
+    format: date-time
+  updated_at:
+    title: Updated At
+    type: string
+    format: date-time

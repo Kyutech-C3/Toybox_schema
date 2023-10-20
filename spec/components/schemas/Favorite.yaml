@@ -1,0 +1,18 @@
+title: Favorite
+required:
+  - favorites
+  - is_favorite
+  - favorite_count
+type: object
+properties:
+  favorites:
+    title: Favorites
+    type: array
+    items:
+      $ref: ./BaseFavorite.yaml
+  is_favorite:
+    title: Is Favorite
+    type: boolean
+  favorite_count:
+    title: Favorite Count
+    type: integer

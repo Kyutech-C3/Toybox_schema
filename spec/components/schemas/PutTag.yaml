@@ -1,0 +1,9 @@
+title: PutTag
+type: object
+properties:
+  name:
+    title: Name
+    type: string
+  color:
+    title: Color
+    type: string

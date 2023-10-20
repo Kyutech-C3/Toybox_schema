@@ -1,0 +1,20 @@
+name: Release
+on:
+    push:
+        branches:
+            - main
+permissions:
+    contents: write
+jobs:
+    release:
+        name: Release
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Setup
+              uses: ./.github/actions/install
+
+            - name: Release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: pnpm semantic-release

@@ -1,0 +1,64 @@
+title: Work
+required:
+  - id
+  - title
+  - description
+  - description_html
+  - user
+  - assets
+  - urls
+  - visibility
+  - tags
+  - thumbnail
+  - created_at
+  - updated_at
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+  title:
+    title: Title
+    type: string
+  description:
+    title: Description
+    type: string
+  description_html:
+    title: Description Html
+    type: string
+  user:
+    $ref: ./User.yaml
+  assets:
+    title: Assets
+    type: array
+    items:
+      $ref: ./Asset.yaml
+  urls:
+    title: Urls
+    type: array
+    items:
+      $ref: ./UrlInfo.yaml
+  visibility:
+    title: Visibility
+    type: string
+  tags:
+    title: Tags
+    type: array
+    items:
+      $ref: ./GetTag.yaml
+  thumbnail:
+    $ref: ./Asset.yaml
+  favorite_count:
+    title: Favorite Count
+    type: integer
+  is_favorite:
+    title: Is Favorite
+    type: boolean
+  created_at:
+    title: Created At
+    type: string
+    format: date-time
+  updated_at:
+    title: Updated At
+    type: string
+    format: date-time

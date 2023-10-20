@@ -1,0 +1,50 @@
+openapi: 3.0.2
+info:
+  title: toybox-server
+  version: 0.1.0
+paths:
+  /api/v1/auth/sign_up:
+    $ref: paths/api_v1_auth_sign_up.yaml
+  /api/v1/auth/token:
+    $ref: paths/api_v1_auth_token.yaml
+  /api/v1/auth/discord:
+    $ref: paths/api_v1_auth_discord.yaml
+  /api/v1/auth/discord/callback:
+    $ref: paths/api_v1_auth_discord_callback.yaml
+  /api/v1/users/@me:
+    $ref: paths/api_v1_users_@me.yaml
+  /api/v1/users/{user_id}:
+    $ref: paths/api_v1_users_{user_id}.yaml
+  /api/v1/users:
+    $ref: paths/api_v1_users.yaml
+  /api/v1/users/@me/works:
+    $ref: paths/api_v1_users_@me_works.yaml
+  /api/v1/users/{user_id}/works:
+    $ref: paths/api_v1_users_{user_id}_works.yaml
+  /api/v1/users/@me/favorite:
+    $ref: paths/api_v1_users_@me_favorite.yaml
+  /api/v1/users/{user_id}/favorite:
+    $ref: paths/api_v1_users_{user_id}_favorite.yaml
+  /api/v1/tags:
+    $ref: paths/api_v1_tags.yaml
+  /api/v1/tags/{tag_id}:
+    $ref: paths/api_v1_tags_{tag_id}.yaml
+  /api/v1/works:
+    $ref: paths/api_v1_works.yaml
+  /api/v1/works/{work_id}:
+    $ref: paths/api_v1_works_{work_id}.yaml
+  /api/v1/works/{work_id}/comments:
+    $ref: paths/api_v1_works_{work_id}_comments.yaml
+  /api/v1/works/{work_id}/comments/{comment_id}:
+    $ref: paths/api_v1_works_{work_id}_comments_{comment_id}.yaml
+  /api/v1/works/{work_id}/favorite:
+    $ref: paths/api_v1_works_{work_id}_favorite.yaml
+  /api/v1/assets:
+    $ref: paths/api_v1_assets.yaml
+  /api/v1/assets/{asset_id}:
+    $ref: paths/api_v1_assets_{asset_id}.yaml
+components:
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

@@ -1,0 +1,17 @@
+get:
+  tags:
+    - users
+  summary: Favorite By User Id
+  operationId: favorite_by_user_id_api_v1_users__me_favorite_get
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            title: Response Favorite By User Id Api V1 Users  Me Favorite Get
+            type: array
+            items:
+              $ref: ../components/schemas/Work.yaml
+  security:
+    - HTTPBearer: []

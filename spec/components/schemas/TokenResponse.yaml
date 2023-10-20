@@ -1,0 +1,16 @@
+title: TokenResponse
+required:
+  - expired_at
+  - refresh_token
+  - access_token
+type: object
+properties:
+  expired_at:
+    title: Expired At
+    type: string
+  refresh_token:
+    title: Refresh Token
+    type: string
+  access_token:
+    title: Access Token
+    type: string
