@@ -4,7 +4,7 @@
     "private": true,
     "description": "toybox-schema",
     "scripts": {
-        "build": "swagger-merger -i './spec/openapi.yml' -o ./build/openapi.yml",
+        "build": "swagger-merger -i './spec/openapi.yaml' -o ./build/openapi.yml",
         "codegen": "redocly build-docs ./build/openapi.yml -o ./static/index.html",
         "semantic-release": "semantic-release"
     },
