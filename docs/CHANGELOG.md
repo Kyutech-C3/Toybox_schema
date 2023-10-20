@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/Kyutech-C3/Toybox_schema/compare/v1.1.0...v1.2.0) (2023-10-20)
+
+
+### Features
+
+* add name example ([5b5b3af](https://github.com/Kyutech-C3/Toybox_schema/commit/5b5b3af31a71de346e8d18500a06bc832a615f34))
+* add other data examples ([f418f3f](https://github.com/Kyutech-C3/Toybox_schema/commit/f418f3f5de89a6495af8e408d5f987a2645daf29))
+
 # [1.1.0](https://github.com/Kyutech-C3/Toybox_schema/compare/v1.0.0...v1.1.0) (2023-10-20)
 
 
