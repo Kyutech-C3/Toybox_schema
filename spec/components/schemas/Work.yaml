@@ -21,12 +21,15 @@ properties:
   title:
     title: Title
     type: string
+    example: title
   description:
     title: Description
     type: string
+    example: description
   description_html:
     title: Description Html
     type: string
+    example: <h1>Description Html</h1>
   user:
     $ref: ./User.yaml
   assets:
@@ -42,6 +45,7 @@ properties:
   visibility:
     title: Visibility
     type: string
+    example: public
   tags:
     title: Tags
     type: array
@@ -52,9 +56,11 @@ properties:
   favorite_count:
     title: Favorite Count
     type: integer
+    example: 10
   is_favorite:
     title: Is Favorite
     type: boolean
+    example: true
   created_at:
     title: Created At
     type: string

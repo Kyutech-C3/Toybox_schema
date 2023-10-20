@@ -11,3 +11,4 @@ properties:
   color:
     title: Color
     type: string
+    example: blue

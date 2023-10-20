@@ -7,3 +7,4 @@ enum:
   - model
 type: string
 description: An enumeration.
+example: image

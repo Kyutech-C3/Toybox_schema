@@ -5,3 +5,4 @@ enum:
   - draft
 type: string
 description: An enumeration.
+example: public

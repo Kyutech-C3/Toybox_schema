@@ -12,6 +12,7 @@ properties:
     maxLength: 500
     minLength: 1
     type: string
+    example: reply content
   id:
     title: Id
     type: string
@@ -25,6 +26,7 @@ properties:
   visibility:
     title: Visibility
     type: string
+    example: public
   reply_at:
     title: Reply At
     type: string

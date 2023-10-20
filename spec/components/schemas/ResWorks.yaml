@@ -12,3 +12,4 @@ properties:
   works_total_count:
     title: Works Total Count
     type: integer
+    example: 4

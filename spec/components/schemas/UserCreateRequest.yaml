@@ -14,9 +14,11 @@ properties:
     title: Email
     type: string
     format: email
+    example: example@example.mail
   password:
     title: Password
     type: string
+    example: password
   display_name:
     title: Display Name
     type: string
@@ -27,3 +29,4 @@ properties:
     minLength: 1
     type: string
     format: uri
+    example: https://example.com

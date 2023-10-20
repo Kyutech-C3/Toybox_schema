@@ -8,3 +8,4 @@ properties:
     maxLength: 500
     minLength: 1
     type: string
+    example: this is post comment

@@ -11,9 +11,11 @@ properties:
   url:
     title: Url
     type: string
+    example: https://example.com
   url_type:
     title: Url Type
     type: string
+    example: other
   id:
     title: Id
     type: string

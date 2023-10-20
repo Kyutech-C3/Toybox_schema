@@ -13,6 +13,8 @@ properties:
   is_favorite:
     title: Is Favorite
     type: boolean
+    example: true
   favorite_count:
     title: Favorite Count
     type: integer
+    example: 3

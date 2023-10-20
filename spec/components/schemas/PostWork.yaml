@@ -12,12 +12,15 @@ properties:
   title:
     title: Title
     type: string
+    example: post title
   description:
     title: Description
     type: string
+    example: post description
   visibility:
     title: Visibility
     type: string
+    example: public
   thumbnail_asset_id:
     title: Thumbnail Asset Id
     type: string

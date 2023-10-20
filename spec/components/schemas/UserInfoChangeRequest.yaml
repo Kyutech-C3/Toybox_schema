@@ -11,9 +11,11 @@ properties:
     minLength: 1
     type: string
     format: uri
+    example: https://example.com
   profile:
     title: Profile
     type: string
+    example: user profile
   twitter_id:
     title: Twitter Id
     type: string

@@ -13,6 +13,7 @@ properties:
     maxLength: 500
     minLength: 1
     type: string
+    example: this is comment content
   id:
     title: Id
     type: string
@@ -26,13 +27,16 @@ properties:
   visibility:
     title: Visibility
     type: string
+    example: public
   reply_at:
     title: Reply At
     type: string
+    example: 2022-10-30T18:05:09.184150
   created_at:
     title: Created At
     type: string
     format: date-time
+    example: 2022-10-30T18:05:09.184150
   updated_at:
     title: Updated At
     type: string
@@ -41,3 +45,4 @@ properties:
   number_of_reply:
     title: Number Of Reply
     type: integer
+    example: 4

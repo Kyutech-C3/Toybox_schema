@@ -12,6 +12,7 @@ properties:
   asset_type:
     title: Asset Type
     type: string
+    example: video
   id:
     title: Id
     type: string
@@ -21,9 +22,11 @@ properties:
   extension:
     title: Extension
     type: string
+    example: mp4
   url:
     title: Url
     type: string
+    example: https://example.com
   created_at:
     title: Created At
     type: string
