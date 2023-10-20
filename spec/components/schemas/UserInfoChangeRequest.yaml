@@ -16,6 +16,8 @@ properties:
   twitter_id:
     title: Twitter Id
     type: string
+    example: twitter_id
   github_id:
     title: Github Id
     type: string
+    example: github_id

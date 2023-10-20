@@ -17,6 +17,7 @@ properties:
   id:
     title: Id
     type: string
+    example: 84A743F4-97E6-42A9-9F6B-3B83B90BF524
   user:
     $ref: ./User.yaml
   created_at:
