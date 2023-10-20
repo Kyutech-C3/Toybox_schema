@@ -32,7 +32,9 @@ properties:
     title: Created At
     type: string
     format: date-time
+    example: 2022-10-30T18:05:09.184150
   updated_at:
     title: Updated At
     type: string
     format: date-time
+    example: 2022-10-30T18:05:09.184150
