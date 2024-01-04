@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package proto.schema.tags.rpc;
+
+import "proto/schema/tags/resources/tags.proto";
+import "proto/third_party/grpc/openapiv2/options/annotations.proto";
+
+option go_package = "./";
+
+message GetTagsResponse {
+  repeated proto.schema.tags.resources.Tag tags = 1;
+}
+
+message GetTagsRequest {
+  int32 limit = 1;
+  string smallest_tag_id = 2;
+  string biggest_tag_id = 3;
+  string w = 4;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example:"{\"limit\": 10, \"smallest_tag_id\": \"\", \"biggest_tag_id\": \"\", \"w\": \"\"}"
+  };
+}

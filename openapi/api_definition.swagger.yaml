@@ -1,0 +1,72 @@
+swagger: "2.0"
+info:
+  title: proto/schema/tags/tags.proto
+  version: version not set
+tags:
+  - name: TagsService
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v1/tags:
+    get:
+      operationId: TagsService_GetTags
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/rpcGetTagsResponse'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: smallest_tag_id
+          in: query
+          required: false
+          type: string
+        - name: biggest_tag_id
+          in: query
+          required: false
+          type: string
+        - name: w
+          in: query
+          required: false
+          type: string
+      tags:
+        - TagsService
+definitions:
+  rpcGetTagsResponse:
+    type: object
+    properties:
+      tags:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/tagsresourcesTag'
+  tagsresourcesTag:
+    type: object
+    example:
+      color: '#000000'
+      id: "1"
+      name: tag1
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      color:
+        type: string

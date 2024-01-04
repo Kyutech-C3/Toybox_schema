@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package proto.schema.tags;
+
+import "proto/schema/tags/rpc/tags.proto";
+import "proto/third_party/google/api/annotations.proto";
+import "proto/third_party/grpc/openapiv2/options/annotations.proto";
+option go_package = "./";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  responses: {
+    key: "422";
+    value: {
+      description: "Validation Error"
+      examples: {
+        key: "application/json"
+        value: "{\"detail\":[{\"loc\":[\"string\",0],\"msg\":\"string\",\"type\":\"string\"}]}"
+      }
+    }
+  }
+};
+
+message ErrorResponse {
+  int32 status = 1;
+  string title = 2;
+  string detail = 3;
+}
+service TagsService {
+  rpc GetTags(proto.schema.tags.rpc.GetTagsRequest)
+      returns (proto.schema.tags.rpc.GetTagsResponse) {
+    option (google.api.http) = {
+      get : "/v1/tags"
+    };
+  };
+}
