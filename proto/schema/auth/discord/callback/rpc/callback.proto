@@ -8,7 +8,7 @@ import "proto/third_party/grpc/openapiv2/options/annotations.proto";
 option go_package = "./";
 
 message DiscordCallbackResponse {
-  proto.schema.auth.discord.callback.resources.DiscordCallback token = 1;
+  proto.schema.auth.discord.callback.resources.DiscordToken token = 1;
 }
 
 message DiscordCallbackRequest {
