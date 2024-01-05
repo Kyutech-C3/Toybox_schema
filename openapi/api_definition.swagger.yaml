@@ -17,7 +17,7 @@ paths:
         "200":
           description: A successful response.
           schema:
-            $ref: '#/definitions/rpcDiscordCallbackResponse'
+            $ref: '#/definitions/resourcesDiscordToken'
         "422":
           description: Validation Error
           schema: {}
@@ -76,8 +76,12 @@ paths:
       tags:
         - TagsService
 definitions:
-  rpcDiscordCallbackResponse:
+  resourcesDiscordToken:
     type: object
+    example:
+      access_token: token
+      expired_at: expire-time
+      refresh_token: refresh-token
     properties:
       access_token:
         type: string

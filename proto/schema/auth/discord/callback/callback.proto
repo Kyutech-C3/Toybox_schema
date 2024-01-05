@@ -3,6 +3,7 @@ syntax = "proto3";
 package proto.schema.auth.discord.callback;
 
 import "proto/schema/auth/discord/callback/rpc/callback.proto";
+import "proto/schema/auth/discord/callback/resources/callback.proto";
 import "proto/third_party/google/api/annotations.proto";
 import "proto/third_party/grpc/openapiv2/options/annotations.proto";
 option go_package = "./";
@@ -30,7 +31,7 @@ message ErrorResponse {
 service DiscordCallbackService {
   rpc GetDiscordCallback(
       proto.schema.auth.discord.callback.rpc.DiscordCallbackRequest)
-      returns (proto.schema.auth.discord.callback.rpc.DiscordCallbackResponse) {
+      returns (proto.schema.auth.discord.callback.resources.DiscordToken) {
     option (google.api.http) = {
       get : "/v1/auth/discord/callback"
     };

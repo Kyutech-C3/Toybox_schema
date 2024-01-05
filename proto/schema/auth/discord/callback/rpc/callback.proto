@@ -6,12 +6,6 @@ import "proto/third_party/grpc/openapiv2/options/annotations.proto";
 
 option go_package = "./";
 
-message DiscordCallbackResponse {
-  string access_token = 1;
-  string refresh_token = 2;
-  string expired_at = 3;
-}
-
 message DiscordCallbackRequest {
   string code = 1;
 
