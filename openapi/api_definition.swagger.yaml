@@ -76,16 +76,7 @@ paths:
       tags:
         - TagsService
 definitions:
-  resourcesDiscordToken:
-    type: object
-    example:
-      access_token: token
-      expired_at: expire-time
-      refresh_token: refresh-token
-    properties:
-      token:
-        $ref: '#/definitions/resourcesToken'
-  resourcesToken:
+  rpcDiscordCallbackResponse:
     type: object
     properties:
       access_token:
@@ -94,11 +85,6 @@ definitions:
         type: string
       expired_at:
         type: string
-  rpcDiscordCallbackResponse:
-    type: object
-    properties:
-      token:
-        $ref: '#/definitions/resourcesDiscordToken'
   rpcGetTagsResponse:
     type: object
     properties:
