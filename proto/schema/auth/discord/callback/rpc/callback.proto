@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package proto.schema.auth.discord.callback.rpc;
+
+import "proto/third_party/grpc/openapiv2/options/annotations.proto";
+
+option go_package = "./";
+
+message DiscordCallbackRequest {
+  string code = 1;
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example : "{\"code\": \"some-code\"}"
+  };
+}
