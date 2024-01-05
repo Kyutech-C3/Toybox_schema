@@ -1,14 +1,41 @@
 swagger: "2.0"
 info:
-  title: proto/schema/tags/tags.proto
+  title: proto/schema/auth/discord/callback/callback.proto
   version: version not set
 tags:
+  - name: DiscordCallbackService
   - name: TagsService
 consumes:
   - application/json
 produces:
   - application/json
 paths:
+  /v1/auth/discord/callback:
+    get:
+      operationId: DiscordCallbackService_GetDiscordCallback
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/rpcDiscordCallbackResponse'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: code
+          in: query
+          required: false
+          type: string
+      tags:
+        - DiscordCallbackService
   /v1/tags:
     get:
       operationId: TagsService_GetTags
@@ -49,6 +76,24 @@ paths:
       tags:
         - TagsService
 definitions:
+  resourcesDiscordToken:
+    type: object
+    example:
+      access_token: token
+      expired_at: expire-time
+      refresh_token: refresh-token
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+      expired_at:
+        type: string
+  rpcDiscordCallbackResponse:
+    type: object
+    properties:
+      token:
+        $ref: '#/definitions/resourcesDiscordToken'
   rpcGetTagsResponse:
     type: object
     properties:
