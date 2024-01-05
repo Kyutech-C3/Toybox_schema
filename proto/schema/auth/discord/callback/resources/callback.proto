@@ -5,10 +5,14 @@ import "proto/third_party/grpc/openapiv2/options/annotations.proto";
 
 option go_package = "./";
 
-message DiscordToken {
+message Token {
   string access_token = 1;
   string refresh_token = 2;
   string expired_at = 3;
+}
+
+message DiscordToken {
+  Token token = 1;
 
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     example:"{ \"access_token\": \"token\", \"refresh_token\": \"refresh-token\", \"expired_at\": \"expire-time\" }"

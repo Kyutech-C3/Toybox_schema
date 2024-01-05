@@ -83,6 +83,11 @@ definitions:
       expired_at: expire-time
       refresh_token: refresh-token
     properties:
+      token:
+        $ref: '#/definitions/resourcesToken'
+  resourcesToken:
+    type: object
+    properties:
       access_token:
         type: string
       refresh_token:
