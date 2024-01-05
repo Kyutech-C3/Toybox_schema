@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package proto.schema.auth.discord.callback;
+
+import "proto/schema/auth/discord/callback/rpc/callback.proto";
+import "proto/third_party/google/api/annotations.proto";
+import "proto/third_party/grpc/openapiv2/options/annotations.proto";
+option go_package = "./";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  responses: {
+    key: "422";
+    value: {
+      description: "Validation Error"
+      examples: {
+        key: "application/json"
+        value: "{\"detail\":[{\"loc\":[\"string\",0],\"msg\":\"string\",\"type\":\"string\"}]}"
+      }
+    }
+  }
+};
+
+message ErrorResponse {
+  int32 status = 1;
+  string title = 2;
+  string detail = 3;
+}
+
+service DiscordCallbackService {
+  rpc GetDiscordCallback(proto.schema.auth.discord.callback.rpc.DiscordCallbackRequest)
+      returns (proto.schema.auth.discord.callback.rpc.DiscordCallbackResponse) {
+    option (google.api.http) = {
+      get : "/v1/auth/discord/callback"
+    };
+  };
+}
