@@ -1,0 +1,226 @@
+swagger: "2.0"
+info:
+  title: proto/schema/tags/tags.proto
+  version: version not set
+tags:
+  - name: TagsService
+  - name: DiscordService
+  - name: DiscordCallbackService
+  - name: MeService
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v1/auth/discord:
+    post:
+      operationId: DiscordService_GetDiscord
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: string
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      tags:
+        - DiscordService
+  /v1/auth/discord/callback:
+    get:
+      operationId: DiscordCallbackService_GetDiscordCallback
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resourcesDiscordToken'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: code
+          in: query
+          required: false
+          type: string
+      tags:
+        - DiscordCallbackService
+  /v1/tags:
+    get:
+      operationId: TagsService_GetTags
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/rpcGetTagsResponse'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: smallest_tag_id
+          in: query
+          required: false
+          type: string
+        - name: biggest_tag_id
+          in: query
+          required: false
+          type: string
+        - name: w
+          in: query
+          required: false
+          type: string
+      tags:
+        - TagsService
+  /v1/users/@me:
+    get:
+      operationId: MeService_GetMe
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resourcesAccount'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      tags:
+        - MeService
+    put:
+      operationId: MeService_PutMe
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resourcesAccount'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: display_name
+          in: query
+          required: false
+          type: string
+        - name: profile
+          in: query
+          required: false
+          type: string
+        - name: twitter_id
+          in: query
+          required: false
+          type: string
+        - name: github_id
+          in: query
+          required: false
+          type: string
+      tags:
+        - MeService
+definitions:
+  resourcesAccount:
+    type: object
+    example:
+      avatar_url: https://example.com/
+      created_at: "2024-01-11T07:56:02.206Z"
+      display_name: string
+      github_id: string
+      id: string
+      name: string
+      profile: string
+      twitter_id: string
+      updated_at: "2024-01-11T07:56:02.206Z"
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      display_name:
+        type: string
+      avatar_url:
+        type: string
+      profile:
+        type: string
+      twitter_id:
+        type: string
+      github_id:
+        type: string
+      created_at:
+        type: string
+        title: google.type.Date ?
+      updated_at:
+        type: string
+        title: google.type.Date ?
+  resourcesDiscordToken:
+    type: object
+    example:
+      access_token: token
+      expired_at: expire-time
+      refresh_token: refresh-token
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+      expired_at:
+        type: string
+  rpcGetTagsResponse:
+    type: object
+    properties:
+      tags:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/tagsresourcesTag'
+  tagsresourcesTag:
+    type: object
+    example:
+      color: '#000000'
+      id: "1"
+      name: tag1
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      color:
+        type: string
