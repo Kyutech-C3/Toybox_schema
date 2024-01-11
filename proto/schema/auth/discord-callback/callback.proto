@@ -2,25 +2,12 @@ syntax = "proto3";
 
 package proto.schema.auth.discord.callback;
 
-import "proto/schema/auth/discord/callback/rpc/callback.proto";
-import "proto/schema/auth/discord/callback/resources/callback.proto";
-import "proto/third_party/google/api/annotations.proto";
-import "proto/third_party/grpc/openapiv2/options/annotations.proto";
-option go_package = "./";
+import "proto/schema/auth/discord-callback/rpc/callback.proto";
+import "proto/schema/auth/discord-callback/resources/callback.proto";
 
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
-  responses : {key : "422";
-value : {
-description:
-  "Validation Error" examples : {
-  key:
-    "application/json" value : "{\"detail\":[{\"loc\":[\"string\",0],\"msg\":"
-                               "\"string\",\"type\":\"string\"}]}"
-  }
-}
-}
-}
-;
+import "proto/third_party/google/api/annotations.proto";
+
+option go_package = "./";
 
 message ErrorResponse {
   int32 status = 1;
