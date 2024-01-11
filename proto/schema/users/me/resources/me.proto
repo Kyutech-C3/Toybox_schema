@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package proto.schema.users.me.resources;
+import "proto/third_party/grpc/openapiv2/options/annotations.proto";
+
+option go_package = "./";
+
+message Account {
+  string id = 1;
+  string name = 2;
+  string display_name = 3;
+  string avatar_url = 4;
+  string profile = 5;
+  string twitter_id = 6;
+  string github_id = 7;
+  string created_at = 8; // google.type.Date ?
+  string updated_at = 9; // google.type.Date ?
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example : "{"
+              "\"id\": \"string\","
+              "\"name\": \"string\","
+              "\"display_name\": \"string\","
+              "\"avatar_url\": \"https://example.com/\","
+              "\"profile\": \"string\","
+              "\"twitter_id\": \"string\","
+              "\"github_id\": \"string\","
+              "\"created_at\": \"2024-01-11T07:56:02.206Z\","
+              "\"updated_at\": \"2024-01-11T07:56:02.206Z\""
+              "}"
+  };
+}

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package proto.schema.users.me.rpc;
+
+import "proto/third_party/grpc/openapiv2/options/annotations.proto";
+
+option go_package = "./";
+
+message AccountPatcher {
+  string display_name = 1;
+  string profile = 2;
+  string twitter_id = 3;
+  string github_id = 4;
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example : "{"
+              "\"display_name\": \"string\","
+              "\"profile\": \"string\","
+              "\"twitter_id\": \"string\","
+              "\"github_id\": \"string\""
+              "}"
+  };
+}
