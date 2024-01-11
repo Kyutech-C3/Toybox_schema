@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package proto.schema.auth.token.rpc;
+
+option go_package = "./";
+
+message PostTokenRequest { string refresh_token = 1; }
+
+message PostTokenResponse {
+  string expired_at = 1;
+  string refresh_token = 2;
+  string access_token = 3;
+}
