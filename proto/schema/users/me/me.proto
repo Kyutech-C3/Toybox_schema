@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package proto.schema.users.me;
+
+import "proto/schema/users/me/resources/me.proto";
+import "proto/schema/users/me/rpc/me.proto";
+
+import "proto/third_party/google/api/annotations.proto";
+
+option go_package = "./";
+
+service MeService {
+  rpc GetMe(google.protobuf.Empty)
+      returns (proto.schema.users.me.resources.Account) {
+    option (google.api.http) = {
+      get : "/v1/users/@me"
+    };
+  };
+
+  rpc PutMe(proto.schema.users.me.rpc.AccountPatcher)
+      returns (proto.schema.users.me.resources.Account) {
+    option (google.api.http) = {
+      put : "/v1/users/@me"
+    };
+  };
+}
