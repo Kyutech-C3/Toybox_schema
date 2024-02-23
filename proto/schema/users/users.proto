@@ -1,0 +1,29 @@
+// proto/schema/users/users.proto
+syntax = "proto3";
+
+package proto.schema.users;
+
+import "proto/schema/users/me/resources/me.proto";
+import "proto/third_party/google/api/wrappers.proto";
+import "proto/third_party/google/api/annotations.proto";
+
+option go_package = "./";
+
+message GetUsersRequest {
+  // Default value: 30
+  google.protobuf.Int32Value limit = 1;
+  string oldest_user_id = 2;
+  string newest_user_id = 3;
+}
+
+message GetUsersResponse {
+  repeated proto.schema.users.me.resources.Account users = 1;
+}
+
+service UserService {
+  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse) {
+    option (google.api.http) = {
+      get : "/v1/users"
+    };
+  };
+}
