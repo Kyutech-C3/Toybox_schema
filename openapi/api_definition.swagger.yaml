@@ -4,6 +4,7 @@ info:
   version: version not set
 tags:
   - name: DiscordCallbackService
+  - name: TokenService
   - name: SignUpService
   - name: TagsService
 consumes:
@@ -79,6 +80,32 @@ paths:
           type: string
       tags:
         - SignUpService
+  /v1/auth/token:
+    post:
+      operationId: TokenService_PostToken
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/rpcPostTokenResponse'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: refresh_token
+          in: query
+          required: false
+          type: string
+      tags:
+        - TokenService
   /v1/tags:
     get:
       operationId: TagsService_GetTags
@@ -171,6 +198,15 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/tagsresourcesTag'
+  rpcPostTokenResponse:
+    type: object
+    properties:
+      expired_at:
+        type: string
+      refresh_token:
+        type: string
+      access_token:
+        type: string
   tagsresourcesTag:
     type: object
     example:
