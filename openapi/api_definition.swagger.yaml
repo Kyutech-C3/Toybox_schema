@@ -1,18 +1,40 @@
 swagger: "2.0"
 info:
-  title: proto/schema/auth/discord/callback/callback.proto
+  title: proto/schema/tags/tags.proto
   version: version not set
 tags:
-  - name: DiscordCallbackService
-  - name: TokenService
-  - name: SignUpService
   - name: TagsService
+  - name: TokenService
+  - name: DiscordService
+  - name: SignUpService
+  - name: DiscordCallbackService
   - name: MeService
 consumes:
   - application/json
 produces:
   - application/json
 paths:
+  /v1/auth/discord:
+    post:
+      operationId: DiscordService_GetDiscord
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: string
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      tags:
+        - DiscordService
   /v1/auth/discord/callback:
     get:
       operationId: DiscordCallbackService_GetDiscordCallback
