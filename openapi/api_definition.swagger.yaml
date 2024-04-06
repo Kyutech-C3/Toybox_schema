@@ -4,8 +4,10 @@ info:
   version: version not set
 tags:
   - name: DiscordCallbackService
-  - name: MeService
+  - name: TokenService
+  - name: SignUpService
   - name: TagsService
+  - name: MeService
 consumes:
   - application/json
 produces:
@@ -37,6 +39,74 @@ paths:
           type: string
       tags:
         - DiscordCallbackService
+  /v1/auth/sign_up:
+    post:
+      operationId: SignUpService_PostSignUp
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resourcesAccount'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: email
+          in: query
+          required: false
+          type: string
+        - name: password
+          in: query
+          required: false
+          type: string
+        - name: display_name
+          in: query
+          required: false
+          type: string
+        - name: avatar_url
+          in: query
+          required: false
+          type: string
+      tags:
+        - SignUpService
+  /v1/auth/token:
+    post:
+      operationId: TokenService_PostToken
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/rpcPostTokenResponse'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: refresh_token
+          in: query
+          required: false
+          type: string
+      tags:
+        - TokenService
   /v1/tags:
     get:
       operationId: TagsService_GetTags
@@ -192,6 +262,15 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/tagsresourcesTag'
+  rpcPostTokenResponse:
+    type: object
+    properties:
+      expired_at:
+        type: string
+      refresh_token:
+        type: string
+      access_token:
+        type: string
   tagsresourcesTag:
     type: object
     example:
