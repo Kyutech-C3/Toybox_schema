@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package proto.schema.auth.sign_up.resources;
+
+option go_package = "./";
+
+message InitialAccountTemplate {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+  string display_name = 4;
+  string avatar_url = 5;
+}

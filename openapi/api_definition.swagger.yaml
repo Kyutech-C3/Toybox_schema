@@ -1,16 +1,41 @@
 swagger: "2.0"
 info:
-  title: proto/schema/auth/discord/callback/callback.proto
+  title: proto/schema/tags/tags.proto
   version: version not set
 tags:
+  - name: TagsService
+  - name: TokenService
+  - name: DiscordService
+  - name: SignUpService
   - name: DiscordCallbackService
   - name: UserService
-  - name: TagsService
+  - name: MeService
 consumes:
   - application/json
 produces:
   - application/json
 paths:
+  /v1/auth/discord:
+    post:
+      operationId: DiscordService_GetDiscord
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: string
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      tags:
+        - DiscordService
   /v1/auth/discord/callback:
     get:
       operationId: DiscordCallbackService_GetDiscordCallback
@@ -37,6 +62,74 @@ paths:
           type: string
       tags:
         - DiscordCallbackService
+  /v1/auth/sign_up:
+    post:
+      operationId: SignUpService_PostSignUp
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resourcesAccount'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: email
+          in: query
+          required: false
+          type: string
+        - name: password
+          in: query
+          required: false
+          type: string
+        - name: display_name
+          in: query
+          required: false
+          type: string
+        - name: avatar_url
+          in: query
+          required: false
+          type: string
+      tags:
+        - SignUpService
+  /v1/auth/token:
+    post:
+      operationId: TokenService_PostToken
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/rpcPostTokenResponse'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: refresh_token
+          in: query
+          required: false
+          type: string
+      tags:
+        - TokenService
   /v1/tags:
     get:
       operationId: TagsService_GetTags
@@ -76,6 +169,53 @@ paths:
           type: string
       tags:
         - TagsService
+  /v1/users/@me:
+    get:
+      operationId: MeService_GetMe
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resourcesAccount'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      tags:
+        - MeService
+    put:
+      operationId: MeService_PutMe
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resourcesAccount'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/rpcAccountPatcher'
+      tags:
+        - MeService
   /v1/users/{user_id}:
     get:
       operationId: UserService_GetUser
@@ -148,6 +288,22 @@ definitions:
         type: string
       expired_at:
         type: string
+  rpcAccountPatcher:
+    type: object
+    example:
+      display_name: string
+      github_id: string
+      profile: string
+      twitter_id: string
+    properties:
+      display_name:
+        type: string
+      profile:
+        type: string
+      twitter_id:
+        type: string
+      github_id:
+        type: string
   rpcGetTagsResponse:
     type: object
     properties:
@@ -156,6 +312,15 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/tagsresourcesTag'
+  rpcPostTokenResponse:
+    type: object
+    properties:
+      expired_at:
+        type: string
+      refresh_token:
+        type: string
+      access_token:
+        type: string
   tagsresourcesTag:
     type: object
     example:
