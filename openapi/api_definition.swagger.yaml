@@ -7,6 +7,7 @@ tags:
   - name: TokenService
   - name: SignUpService
   - name: TagsService
+  - name: MeService
 consumes:
   - application/json
 produces:
@@ -145,6 +146,53 @@ paths:
           type: string
       tags:
         - TagsService
+  /v1/users/@me:
+    get:
+      operationId: MeService_GetMe
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resourcesAccount'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      tags:
+        - MeService
+    put:
+      operationId: MeService_PutMe
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resourcesAccount'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/rpcAccountPatcher'
+      tags:
+        - MeService
 definitions:
   resourcesAccount:
     type: object
@@ -189,6 +237,22 @@ definitions:
       refresh_token:
         type: string
       expired_at:
+        type: string
+  rpcAccountPatcher:
+    type: object
+    example:
+      display_name: string
+      github_id: string
+      profile: string
+      twitter_id: string
+    properties:
+      display_name:
+        type: string
+      profile:
+        type: string
+      twitter_id:
+        type: string
+      github_id:
         type: string
   rpcGetTagsResponse:
     type: object
