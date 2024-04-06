@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package proto.token;
+
+import "proto/schema/auth/token/rpc/token.proto";
+import "proto/third_party/google/api/annotations.proto";
+
+option go_package = "./";
+
+service TokenService {
+  rpc PostToken(proto.schema.auth.token.rpc.PostTokenRequest)
+      returns (proto.schema.auth.token.rpc.PostTokenResponse) {
+    option (google.api.http) = {
+      post : "/v1/auth/token"
+    };
+  };
+}
