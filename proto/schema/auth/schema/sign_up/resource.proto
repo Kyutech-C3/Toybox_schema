@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package proto.schema.auth.sign_up.resources;
+package auth.schema.sign_up;
 
 option go_package = "./";
 
-message InitialAccountTemplate {
+message SignUpRequest {
   string name = 1;
   string email = 2;
   string password = 3;
