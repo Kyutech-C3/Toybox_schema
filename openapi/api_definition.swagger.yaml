@@ -4,7 +4,9 @@ info:
   version: version not set
 tags:
   - name: TagsService
+  - name: TokenService
   - name: DiscordService
+  - name: SignUpService
   - name: DiscordCallbackService
   - name: MeService
 consumes:
@@ -59,6 +61,74 @@ paths:
           type: string
       tags:
         - DiscordCallbackService
+  /v1/auth/sign_up:
+    post:
+      operationId: SignUpService_PostSignUp
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resourcesAccount'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: email
+          in: query
+          required: false
+          type: string
+        - name: password
+          in: query
+          required: false
+          type: string
+        - name: display_name
+          in: query
+          required: false
+          type: string
+        - name: avatar_url
+          in: query
+          required: false
+          type: string
+      tags:
+        - SignUpService
+  /v1/auth/token:
+    post:
+      operationId: TokenService_PostToken
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/rpcPostTokenResponse'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: refresh_token
+          in: query
+          required: false
+          type: string
+      tags:
+        - TokenService
   /v1/tags:
     get:
       operationId: TagsService_GetTags
@@ -138,22 +208,11 @@ paths:
                   msg: string
                   type: string
       parameters:
-        - name: display_name
-          in: query
-          required: false
-          type: string
-        - name: profile
-          in: query
-          required: false
-          type: string
-        - name: twitter_id
-          in: query
-          required: false
-          type: string
-        - name: github_id
-          in: query
-          required: false
-          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/rpcAccountPatcher'
       tags:
         - MeService
 definitions:
@@ -185,11 +244,9 @@ definitions:
       github_id:
         type: string
       created_at:
-        type: string
-        title: google.type.Date ?
+        $ref: '#/definitions/typeDateTime'
       updated_at:
-        type: string
-        title: google.type.Date ?
+        $ref: '#/definitions/typeDateTime'
   resourcesDiscordToken:
     type: object
     example:
@@ -203,6 +260,22 @@ definitions:
         type: string
       expired_at:
         type: string
+  rpcAccountPatcher:
+    type: object
+    example:
+      display_name: string
+      github_id: string
+      profile: string
+      twitter_id: string
+    properties:
+      display_name:
+        type: string
+      profile:
+        type: string
+      twitter_id:
+        type: string
+      github_id:
+        type: string
   rpcGetTagsResponse:
     type: object
     properties:
@@ -211,6 +284,15 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/tagsresourcesTag'
+  rpcPostTokenResponse:
+    type: object
+    properties:
+      expired_at:
+        type: string
+      refresh_token:
+        type: string
+      access_token:
+        type: string
   tagsresourcesTag:
     type: object
     example:
@@ -224,3 +306,91 @@ definitions:
         type: string
       color:
         type: string
+  typeDateTime:
+    type: object
+    properties:
+      year:
+        type: integer
+        format: int32
+        description: |-
+          Optional. Year of date. Must be from 1 to 9999, or 0 if specifying a
+          datetime without a year.
+      month:
+        type: integer
+        format: int32
+        description: Required. Month of year. Must be from 1 to 12.
+      day:
+        type: integer
+        format: int32
+        description: |-
+          Required. Day of month. Must be from 1 to 31 and valid for the year and
+          month.
+      hours:
+        type: integer
+        format: int32
+        description: |-
+          Required. Hours of day in 24 hour format. Should be from 0 to 23. An API
+          may choose to allow the value "24:00:00" for scenarios like business
+          closing time.
+      minutes:
+        type: integer
+        format: int32
+        description: Required. Minutes of hour of day. Must be from 0 to 59.
+      seconds:
+        type: integer
+        format: int32
+        description: |-
+          Required. Seconds of minutes of the time. Must normally be from 0 to 59. An
+          API may allow the value 60 if it allows leap-seconds.
+      nanos:
+        type: integer
+        format: int32
+        description: |-
+          Required. Fractions of seconds in nanoseconds. Must be from 0 to
+          999,999,999.
+      utc_offset:
+        type: string
+        description: |-
+          UTC offset. Must be whole seconds, between -18 hours and +18 hours.
+          For example, a UTC offset of -4:00 would be represented as
+          { seconds: -14400 }.
+      time_zone:
+        $ref: '#/definitions/typeTimeZone'
+        description: Time zone.
+    description: |-
+      Represents civil time (or occasionally physical time).
+
+      This type can represent a civil time in one of a few possible ways:
+
+       * When utc_offset is set and time_zone is unset: a civil time on a calendar
+         day with a particular offset from UTC.
+       * When time_zone is set and utc_offset is unset: a civil time on a calendar
+         day in a particular time zone.
+       * When neither time_zone nor utc_offset is set: a civil time on a calendar
+         day in local time.
+
+      The date is relative to the Proleptic Gregorian Calendar.
+
+      If year is 0, the DateTime is considered not to have a specific year. month
+      and day must have valid, non-zero values.
+
+      This type may also be used to represent a physical time if all the date and
+      time fields are set and either case of the `time_offset` oneof is set.
+      Consider using `Timestamp` message for physical time instead. If your use
+      case also would like to store the user's timezone, that can be done in
+      another field.
+
+      This type is more flexible than some applications may want. Make sure to
+      document and validate your application's limitations.
+  typeTimeZone:
+    type: object
+    properties:
+      id:
+        type: string
+        description: IANA Time Zone Database time zone, e.g. "America/New_York".
+      version:
+        type: string
+        description: Optional. IANA Time Zone Database version number, e.g. "2019a".
+    description: |-
+      Represents a time zone from the
+      [IANA Time Zone Database](https://www.iana.org/time-zones).

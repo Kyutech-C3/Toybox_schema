@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package proto.schema.users.me.resources;
 import "proto/third_party/grpc/openapiv2/options/annotations.proto";
+import "proto/third_party/google/api/type/datetime.proto";
 
 option go_package = "./";
 
@@ -13,8 +14,8 @@ message Account {
   string profile = 5;
   string twitter_id = 6;
   string github_id = 7;
-  string created_at = 8; // google.type.Date ?
-  string updated_at = 9; // google.type.Date ?
+  google.type.DateTime created_at = 8;
+  google.type.DateTime updated_at = 9;
 
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     example : "{"
