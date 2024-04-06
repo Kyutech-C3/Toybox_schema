@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package proto.schema.auth.discord;
+
+import "proto/third_party/google/api/annotations.proto";
+import "proto/third_party/google/api/empty.proto";
+import "proto/third_party/google/api/wrappers.proto";
+
+option go_package = "./";
+
+service DiscordService {
+  rpc GetDiscord(google.protobuf.Empty) returns (google.protobuf.StringValue) {
+    option (google.api.http) = {
+      post : "/v1/auth/discord"
+    };
+  };
+}
