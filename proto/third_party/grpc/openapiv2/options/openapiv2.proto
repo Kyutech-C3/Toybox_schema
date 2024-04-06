@@ -112,7 +112,7 @@ message Swagger {
 //  service EchoService {
 //    rpc Echo(SimpleMessage) returns (SimpleMessage) {
 //      option (google.api.http) = {
-//        get: "/v1/example/echo/{id}"
+//        get: "/api/v1/example/echo/{id}"
 //      };
 //
 //      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {

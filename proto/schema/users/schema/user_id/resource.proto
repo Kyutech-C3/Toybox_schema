@@ -1,10 +1,32 @@
 syntax = "proto3";
 
 package users.schema.user_id;
+import "proto/schema/works/model/model.proto";
 
 option go_package = "./";
 
 // Request type for getting a user.
 message GetUserRequest {
   string user_id = 1; // Path parameter representing the user's ID
+}
+
+message GetUserWorksRequest{
+  string user_id = 1;
+  string vislibility = 2;
+  string newest_user_id = 3;
+  string oldest_user_id = 4;
+  string tags = 5;
+  int32 limit = 6;
+}
+
+message GetUserFavoritesRequest{
+  string user_id = 1;
+}
+
+message GetUserWorksResponse{
+  repeated  proto.schema.works.model.Work works = 1;
+}
+
+message GetUserFavoritesResponse{
+  repeated  proto.schema.works.model.Work works = 1;
 }

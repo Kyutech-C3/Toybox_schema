@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package works.schema.comments;
+import "proto/schema/works/model/model.proto";
+option go_package = "./";
+
+
+message GetCommentsRequest {
+  string work_id = 1;
+  int32 limit = 2;
+  string oldest_comment_id = 3;
+  string newest_comment_id = 4;
+}
+message PostCommentRequest {
+  string work_id = 1;
+  string reply_at = 2;
+  string visibility = 3;
+}
+
+message PostCommentResponse {
+  string content = 1;
+}
+
+message GetReplyCommentsRequest {
+  string work_id = 1;
+  string comment_id = 2;
+  int32 limit = 3;
+  string oldest_comment_id = 4;
+  string newest_comment_id = 5;
+}
+
+message GetCommentsResponse{
+  repeated proto.schema.works.model.Comment comments = 1;
+}
+
+message DeleteCommentRequest {
+  string work_id = 1;
+  string comment_id = 2;
+}
+
+message DeleteCommentResponse{
+  string status = 1;
+}

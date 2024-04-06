@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package proto.schema.works.model;
+
+import "google/protobuf/timestamp.proto";
+import "proto/schema/tags/model/model.proto";
+import "proto/schema/users/model/model.proto";
+import "proto/schema/assets/model/model.proto";
+
+option go_package = "./";
+
+
+message Url {
+  string url = 1;
+  string url_type = 2;
+  string id = 3;
+  proto.schema.users.model.User user = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+message Work {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string description_html = 4;
+  proto.schema.users.model.User user = 5;
+  repeated proto.schema.assets.model.Asset assets = 6;
+  repeated Url urls = 7;
+  string visibility = 8;
+  repeated proto.schema.tags.model.Tag tags = 9;
+  proto.schema.assets.model.Asset thumbnail = 10;
+  int32 favorite_count = 11;
+  bool is_favorite = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message Comment {
+  string id = 1;
+  string content = 2;
+  proto.schema.users.model.User user = 3;
+  string work_id = 4;
+  string visibility = 5;
+  google.protobuf.Timestamp reply_at = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+  int32 number_of_reply = 9;
+}

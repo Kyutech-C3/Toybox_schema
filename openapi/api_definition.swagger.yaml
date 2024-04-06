@@ -5,13 +5,46 @@ info:
 tags:
   - name: AuthService
   - name: TagsService
+  - name: WorksService
   - name: UsersService
+  - name: AssetsService
 consumes:
   - application/json
 produces:
   - application/json
 paths:
-  /v1/auth/discord:
+  /api/v1/assets:
+    post:
+      operationId: AssetsService_CreateAsset
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/assetsCreateAssetResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/assetsCreateAssetRequest'
+      tags:
+        - AssetsService
+  /api/v1/assets/{id}:
+    delete:
+      operationId: AssetsService_DeleteAsset
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/assetsDeleteAssetResponse'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      tags:
+        - AssetsService
+  /api/v1/auth/discord:
     get:
       operationId: AuthService_RedirectDiscord
       responses:
@@ -21,7 +54,7 @@ paths:
             type: string
       tags:
         - AuthService
-  /v1/auth/discord/callback:
+  /api/v1/auth/discord/callback:
     get:
       operationId: AuthService_DiscordCallBack
       responses:
@@ -36,7 +69,7 @@ paths:
           type: string
       tags:
         - AuthService
-  /v1/auth/sign_up:
+  /api/v1/auth/sign_up:
     post:
       operationId: AuthService_SignUp
       responses:
@@ -52,7 +85,7 @@ paths:
             $ref: '#/definitions/sign_upSignUpRequest'
       tags:
         - AuthService
-  /v1/auth/token:
+  /api/v1/auth/token:
     post:
       operationId: AuthService_ExchangeToken
       responses:
@@ -68,7 +101,7 @@ paths:
             $ref: '#/definitions/tokenPostTokenRequest'
       tags:
         - AuthService
-  /v1/tags:
+  /api/v1/tags:
     get:
       operationId: TagsService_GetTags
       responses:
@@ -115,7 +148,7 @@ paths:
             $ref: '#/definitions/tagsPostTagRequest'
       tags:
         - TagsService
-  /v1/tags/{tag_id}:
+  /api/v1/tags/{tag_id}:
     get:
       operationId: TagsService_GetTag
       responses:
@@ -172,7 +205,7 @@ paths:
                 type: string
       tags:
         - TagsService
-  /v1/users:
+  /api/v1/users:
     get:
       operationId: UsersService_GetUsers
       responses:
@@ -197,7 +230,7 @@ paths:
           type: string
       tags:
         - UsersService
-  /v1/users/@me:
+  /api/v1/users/@me:
     get:
       operationId: UsersService_GetMe
       responses:
@@ -222,7 +255,80 @@ paths:
             $ref: '#/definitions/mePutMeRequest'
       tags:
         - UsersService
-  /v1/users/{user_id}:
+  /api/v1/users/@me/avatar:
+    delete:
+      operationId: UsersService_DeleteMeAvatar
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/modelUser'
+      tags:
+        - UsersService
+    put:
+      operationId: UsersService_PutMeAvatar
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/modelUser'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/mePutMeAvatarRequest'
+      tags:
+        - UsersService
+  /api/v1/users/@me/favorites:
+    get:
+      operationId: UsersService_GetMeFavorites
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              type: object
+              $ref: '#/definitions/modelWork'
+      tags:
+        - UsersService
+  /api/v1/users/@me/works:
+    get:
+      operationId: UsersService_GetMeWorks
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              type: object
+              $ref: '#/definitions/modelWork'
+      parameters:
+        - name: visibility
+          in: query
+          required: false
+          type: string
+        - name: oldest_user_id
+          in: query
+          required: false
+          type: string
+        - name: newest_user_id
+          in: query
+          required: false
+          type: string
+        - name: tags
+          in: query
+          required: false
+          type: string
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+      tags:
+        - UsersService
+  /api/v1/users/{user_id}:
     get:
       operationId: UsersService_GetUser
       responses:
@@ -238,7 +344,462 @@ paths:
           type: string
       tags:
         - UsersService
+  /api/v1/users/{user_id}/favorites:
+    get:
+      operationId: UsersService_GetUserFavorites
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              type: object
+              $ref: '#/definitions/modelWork'
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: string
+      tags:
+        - UsersService
+  /api/v1/users/{user_id}/works:
+    get:
+      operationId: UsersService_GetUserWorks
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              type: object
+              $ref: '#/definitions/modelWork'
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: string
+        - name: vislibility
+          in: query
+          required: false
+          type: string
+        - name: newest_user_id
+          in: query
+          required: false
+          type: string
+        - name: oldest_user_id
+          in: query
+          required: false
+          type: string
+        - name: tags
+          in: query
+          required: false
+          type: string
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+      tags:
+        - UsersService
+  /api/v1/works:
+    get:
+      operationId: WorksService_GetWorks
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/worksGetWorksResponse'
+      parameters:
+        - name: page
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: visibility
+          in: query
+          required: false
+          type: string
+        - name: tag_names
+          in: query
+          required: false
+          type: string
+        - name: tag_ids
+          in: query
+          required: false
+          type: string
+        - name: search_word
+          in: query
+          required: false
+          type: string
+      tags:
+        - WorksService
+    post:
+      operationId: WorksService_CreateWork
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/modelWork'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/worksCreateWorkRequest'
+      tags:
+        - WorksService
+  /api/v1/works/{work_id}:
+    get:
+      operationId: WorksService_GetWork
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/modelWork'
+      parameters:
+        - name: work_id
+          in: path
+          required: true
+          type: string
+      tags:
+        - WorksService
+    delete:
+      operationId: WorksService_DeleteWork
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+      parameters:
+        - name: work_id
+          in: path
+          required: true
+          type: string
+      tags:
+        - WorksService
+    put:
+      operationId: WorksService_UpdateWork
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/modelWork'
+      parameters:
+        - name: work_id
+          description: Work ID to update
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            example:
+              assets_id:
+                - asset-789
+                - asset-101
+              description: This is an updated description of the artwork.
+              tags_id:
+                - tag-123
+                - tag-456
+              thumbnail_asset_id: asset-456
+              title: Updated Artwork Title
+              urls:
+                - url: http://example.com/artwork1
+                  url_type: portfolio
+                - url: http://example.com/artwork2
+                  url_type: video
+              visibility: public
+              work_id: work-123
+            properties:
+              title:
+                type: string
+                title: New title for the work
+              description:
+                type: string
+                title: New description
+              visibility:
+                type: string
+                title: New visibility setting
+              thumbnail_asset_id:
+                type: string
+                title: ID for the new thumbnail asset
+              assets_id:
+                type: array
+                items:
+                  type: string
+                title: IDs for new or additional assets
+              urls:
+                type: array
+                items:
+                  type: object
+                  $ref: '#/definitions/worksUrlInfo'
+                title: New or updated URLs associated with the work
+              tags_id:
+                type: array
+                items:
+                  type: string
+                title: IDs for new or updated tags associated with the work
+      tags:
+        - WorksService
+  /api/v1/works/{work_id}/comments:
+    get:
+      operationId: WorksService_GetComments
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/commentsGetCommentsResponse'
+      parameters:
+        - name: work_id
+          in: path
+          required: true
+          type: string
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: oldest_comment_id
+          in: query
+          required: false
+          type: string
+        - name: newest_comment_id
+          in: query
+          required: false
+          type: string
+      tags:
+        - WorksService
+    post:
+      operationId: WorksService_CreateComment
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/modelComment'
+      parameters:
+        - name: work_id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              reply_at:
+                type: string
+              visibility:
+                type: string
+      tags:
+        - WorksService
+  /api/v1/works/{work_id}/comments/{comment_id}:
+    get:
+      operationId: WorksService_GetReplyComments
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              type: object
+              $ref: '#/definitions/modelComment'
+      parameters:
+        - name: work_id
+          in: path
+          required: true
+          type: string
+        - name: comment_id
+          in: path
+          required: true
+          type: string
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: oldest_comment_id
+          in: query
+          required: false
+          type: string
+        - name: newest_comment_id
+          in: query
+          required: false
+          type: string
+      tags:
+        - WorksService
+    delete:
+      operationId: WorksService_DeleteComment
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+      parameters:
+        - name: work_id
+          in: path
+          required: true
+          type: string
+        - name: comment_id
+          in: path
+          required: true
+          type: string
+      tags:
+        - WorksService
+  /api/v1/works/{work_id}/favorite:
+    get:
+      operationId: WorksService_GetWorkFavorite
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/favoriteGetWorkFavoriteResponse'
+      parameters:
+        - name: work_id
+          in: path
+          required: true
+          type: string
+      tags:
+        - WorksService
+    delete:
+      operationId: WorksService_DeleteWorkFavorite
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/favoriteDeleteWorkFavoriteResponse'
+      parameters:
+        - name: work_id
+          in: path
+          required: true
+          type: string
+      tags:
+        - WorksService
+    post:
+      operationId: WorksService_CreateWorkFavorite
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/favoritePostWorkFavoriteResponse'
+      parameters:
+        - name: work_id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+      tags:
+        - WorksService
 definitions:
+  assetsCreateAssetRequest:
+    type: object
+    properties:
+      file:
+        type: string
+        format: byte
+      asset_type:
+        $ref: '#/definitions/modelAssetType'
+  assetsCreateAssetResponse:
+    type: object
+    properties:
+      id:
+        type: string
+  assetsDeleteAssetResponse:
+    type: object
+    properties:
+      status:
+        type: string
+  commentsGetCommentsResponse:
+    type: object
+    properties:
+      comments:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/modelComment'
+  favoriteDeleteWorkFavoriteResponse:
+    type: object
+    properties:
+      favorites:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/favoriteGetWorkFavoriteResponseItem'
+      is_favorite:
+        type: boolean
+      favorite_count:
+        type: integer
+        format: int32
+  favoriteGetWorkFavoriteResponse:
+    type: object
+    properties:
+      favorites:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/favoriteGetWorkFavoriteResponseItem'
+      is_favorite:
+        type: boolean
+      favorite_count:
+        type: integer
+        format: int32
+  favoriteGetWorkFavoriteResponseItem:
+    type: object
+    properties:
+      work:
+        $ref: '#/definitions/modelWork'
+      user:
+        $ref: '#/definitions/modelUser'
+      created_at:
+        type: string
+        format: date-time
+  favoritePostWorkFavoriteResponse:
+    type: object
+    properties:
+      favorites:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/favoriteGetWorkFavoriteResponseItem'
+      is_favorite:
+        type: boolean
+      favorite_count:
+        type: integer
+        format: int32
+  meGetMeFavoritesResponse:
+    type: object
+    properties:
+      works:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/modelWork'
+  meGetMeWorksResponse:
+    type: object
+    properties:
+      works:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/modelWork'
+  mePutMeAvatarRequest:
+    type: object
+    properties:
+      file:
+        type: string
   mePutMeRequest:
     type: object
     example:
@@ -255,6 +816,76 @@ definitions:
         type: string
       github_id:
         type: string
+  modelAsset:
+    type: object
+    properties:
+      id:
+        type: string
+      asset_type:
+        $ref: '#/definitions/modelAssetType'
+      user:
+        $ref: '#/definitions/modelUser'
+      extension:
+        type: string
+      url:
+        type: string
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+  modelAssetType:
+    type: string
+    enum:
+      - zip
+      - image
+      - video
+      - music
+      - model
+    default: zip
+  modelComment:
+    type: object
+    properties:
+      id:
+        type: string
+      content:
+        type: string
+      user:
+        $ref: '#/definitions/modelUser'
+      work_id:
+        type: string
+      visibility:
+        type: string
+      reply_at:
+        type: string
+        format: date-time
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+      number_of_reply:
+        type: integer
+        format: int32
+  modelUrl:
+    type: object
+    properties:
+      url:
+        type: string
+      url_type:
+        type: string
+      id:
+        type: string
+      user:
+        $ref: '#/definitions/modelUser'
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
   modelUser:
     type: object
     example:
@@ -286,6 +917,49 @@ definitions:
         $ref: '#/definitions/typeDateTime'
       updated_at:
         $ref: '#/definitions/typeDateTime'
+  modelWork:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      description_html:
+        type: string
+      user:
+        $ref: '#/definitions/modelUser'
+      assets:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/modelAsset'
+      urls:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/modelUrl'
+      visibility:
+        type: string
+      tags:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/tagsmodelTag'
+      thumbnail:
+        $ref: '#/definitions/modelAsset'
+      favorite_count:
+        type: integer
+        format: int32
+      is_favorite:
+        type: boolean
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
   sign_upSignUpRequest:
     type: object
     properties:
@@ -450,6 +1124,22 @@ definitions:
     description: |-
       Represents a time zone from the
       [IANA Time Zone Database](https://www.iana.org/time-zones).
+  user_idGetUserFavoritesResponse:
+    type: object
+    properties:
+      works:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/modelWork'
+  user_idGetUserWorksResponse:
+    type: object
+    properties:
+      works:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/modelWork'
   usersGetUsersResponse:
     type: object
     properties:
@@ -458,3 +1148,69 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/modelUser'
+  worksCreateWorkRequest:
+    type: object
+    example:
+      assets_id:
+        - asset124
+        - asset125
+      description: This is a detailed description of the artwork.
+      tags_id:
+        - tag1
+        - tag2
+      thumbnail_asset_id: asset123
+      title: Amazing Artwork
+      urls:
+        - url: http://example.com/artwork1
+          url_type: portfolio
+        - url: http://example.com/artwork2
+          url_type: video
+      visibility: public
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+      visibility:
+        type: string
+      thumbnail_asset_id:
+        type: string
+      assets_id:
+        type: array
+        items:
+          type: string
+      urls:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/worksUrlInfo'
+        title: URL情報はスキーマによって異なるため、具体的な構造を確認する必要があります。
+      tags_id:
+        type: array
+        items:
+          type: string
+    required:
+      - title
+      - description
+      - visibility
+      - thumbnail_asset_id
+      - assets_id
+      - urls
+      - tags_id
+  worksGetWorksResponse:
+    type: object
+    properties:
+      works:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/modelWork'
+  worksUrlInfo:
+    type: object
+    properties:
+      url:
+        type: string
+        title: The URL
+      url_type:
+        type: string
+        title: The type of the URL, e.g., "portfolio" or "video"

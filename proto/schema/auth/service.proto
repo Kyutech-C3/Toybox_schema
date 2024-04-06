@@ -15,23 +15,23 @@ option go_package = "./";
 service AuthService {
  rpc DiscordCallBack(.auth.schema.discord_callback.DiscordCallbackRequest) returns (google.protobuf.StringValue) {
   option (google.api.http) = {
-   get: "/v1/auth/discord/callback"
+   get: "/api/v1/auth/discord/callback"
   };
  }
  rpc ExchangeToken(.auth.schema.token.PostTokenRequest)returns(.auth.schema.token.PostTokenResponse){
   option (google.api.http) = {
-   post: "/v1/auth/token"
+   post: "/api/v1/auth/token"
    body: "*"
   };
  }
  rpc RedirectDiscord(google.protobuf.Empty) returns (google.protobuf.StringValue) {
   option (google.api.http) = {
-   get: "/v1/auth/discord"
+   get: "/api/v1/auth/discord"
   };
  }
  rpc SignUp(.auth.schema.sign_up.SignUpRequest) returns (proto.schema.users.model.User) {
   option (google.api.http) = {
-   post: "/v1/auth/sign_up"
+   post: "/api/v1/auth/sign_up"
    body: "*"
   };
  }

@@ -14,23 +14,59 @@ option go_package = "./";
 service UsersService {
   rpc GetMe(google.protobuf.Empty) returns (proto.schema.users.model.User) {
     option (google.api.http) = {
-      get : "/v1/users/@me"
+      get : "/api/v1/users/@me"
     };
   };
   rpc PutMe(.users.schema.me.PutMeRequest) returns (proto.schema.users.model.User) {
     option (google.api.http) = {
-      put : "/v1/users/@me"
+      put : "/api/v1/users/@me"
       body : "*"
     };
   };
   rpc GetUsers(.users.schema.users.GetUsersRequest) returns (.users.schema.users.GetUsersResponse) {
     option (google.api.http) = {
-      get : "/v1/users"
+      get : "/api/v1/users"
     };
   };
   rpc GetUser(.users.schema.user_id.GetUserRequest) returns (proto.schema.users.model.User) {
     option (google.api.http) = {
-      get : "/v1/users/{user_id}"
+      get : "/api/v1/users/{user_id}"
+    };
+  };
+  rpc GetMeWorks(.users.schema.me.GetMeWorksRequest) returns (.users.schema.me.GetMeWorksResponse) {
+    option (google.api.http) = {
+      get : "/api/v1/users/@me/works"
+      response_body : "works"
+    };
+  };
+  rpc GetUserWorks(.users.schema.user_id.GetUserWorksRequest) returns (.users.schema.user_id.GetUserWorksResponse) {
+    option (google.api.http) = {
+      get : "/api/v1/users/{user_id}/works"
+      response_body : "works"
+    };
+  };
+  rpc GetMeFavorites(google.protobuf.Empty) returns (.users.schema.me.GetMeFavoritesResponse) {
+    option (google.api.http) = {
+      get : "/api/v1/users/@me/favorites"
+      response_body : "works"
+    };
+  };
+  rpc GetUserFavorites(.users.schema.user_id.GetUserFavoritesRequest) returns (.users.schema.user_id.GetUserFavoritesResponse) {
+    option (google.api.http) = {
+      get : "/api/v1/users/{user_id}/favorites"
+      response_body : "works"
+    };
+  };
+
+  rpc PutMeAvatar(.users.schema.me.PutMeAvatarRequest) returns (proto.schema.users.model.User) {
+    option (google.api.http) = {
+      put : "/api/v1/users/@me/avatar"
+      body : "*"
+    };
+  };
+  rpc DeleteMeAvatar(google.protobuf.Empty) returns (proto.schema.users.model.User) {
+    option (google.api.http) = {
+      delete : "/api/v1/users/@me/avatar"
     };
   };
 }
