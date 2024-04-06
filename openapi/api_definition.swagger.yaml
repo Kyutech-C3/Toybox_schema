@@ -8,6 +8,7 @@ tags:
   - name: DiscordService
   - name: SignUpService
   - name: DiscordCallbackService
+  - name: UserService
   - name: MeService
 consumes:
   - application/json
@@ -215,6 +216,33 @@ paths:
             $ref: '#/definitions/rpcAccountPatcher'
       tags:
         - MeService
+  /v1/users/{user_id}:
+    get:
+      operationId: UserService_GetUser
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resourcesAccount'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: user_id
+          description: Path parameter representing the user's ID
+          in: path
+          required: true
+          type: string
+      tags:
+        - UserService
 definitions:
   resourcesAccount:
     type: object
