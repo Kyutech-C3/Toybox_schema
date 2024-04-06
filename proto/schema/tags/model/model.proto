@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package proto.schema.tags.resources;
+package proto.schema.tags.model;
 import "proto/third_party/grpc/openapiv2/options/annotations.proto";
 
 option go_package = "./";

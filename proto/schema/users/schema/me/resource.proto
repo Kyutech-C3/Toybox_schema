@@ -1,12 +1,13 @@
 syntax = "proto3";
 
-package proto.schema.users.me.rpc;
+package users.schema.me;
 
 import "proto/third_party/grpc/openapiv2/options/annotations.proto";
 
 option go_package = "./";
 
-message AccountPatcher {
+
+message PutMeRequest {
   string display_name = 1;
   string profile = 2;
   string twitter_id = 3;

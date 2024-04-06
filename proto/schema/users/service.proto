@@ -1,0 +1,36 @@
+// proto/schema/users/users.proto
+syntax = "proto3";
+
+package proto.schema.users;
+import "proto/third_party/google/api/annotations.proto";
+import "proto/schema/users/schema/users/resource.proto";
+import "proto/schema/users/schema/user_id/resource.proto";
+import "proto/schema/users/schema/me/resource.proto";
+import "proto/schema/users/model/model.proto";
+import "google/protobuf/empty.proto";
+option go_package = "./";
+
+
+service UsersService {
+  rpc GetMe(google.protobuf.Empty) returns (proto.schema.users.model.User) {
+    option (google.api.http) = {
+      get : "/v1/users/@me"
+    };
+  };
+  rpc PutMe(.users.schema.me.PutMeRequest) returns (proto.schema.users.model.User) {
+    option (google.api.http) = {
+      put : "/v1/users/@me"
+      body : "*"
+    };
+  };
+  rpc GetUsers(.users.schema.users.GetUsersRequest) returns (.users.schema.users.GetUsersResponse) {
+    option (google.api.http) = {
+      get : "/v1/users"
+    };
+  };
+  rpc GetUser(.users.schema.user_id.GetUserRequest) returns (proto.schema.users.model.User) {
+    option (google.api.http) = {
+      get : "/v1/users/{user_id}"
+    };
+  };
+}

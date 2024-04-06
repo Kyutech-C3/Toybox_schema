@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package tags.schema.tags;
+
+import "proto/third_party/grpc/openapiv2/options/annotations.proto";
+import "proto/third_party/google/api/field_behavior.proto";
+
+option go_package = "./";
+
+message GetTagsRequest {
+  string limit = 1 [(google.api.field_behavior) = OPTIONAL];
+  string smallest_tag_id = 2 [(google.api.field_behavior) = OPTIONAL];
+  string biggest_tag_id = 3 [(google.api.field_behavior) = OPTIONAL];
+  string w = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  option(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example: "{\"limit\": 100, \"smallest_tag_id\": \"\", \"biggest_tag_id\": \"\", \"w\": \"\"}"
+  };
+}

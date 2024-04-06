@@ -1,0 +1,38 @@
+// proto/schema/users/users.proto
+syntax = "proto3";
+
+package proto.schema.users;
+import "proto/third_party/google/api/annotations.proto";
+import "proto/third_party/google/api/wrappers.proto";
+import "proto/schema/auth/schema/discord_callback/resource.proto";
+import "proto/schema/auth/schema/sign_up/resource.proto";
+import "proto/schema/auth/schema/token/resource.proto";
+import "proto/schema/users/model/model.proto";
+import "google/protobuf/empty.proto";
+option go_package = "./";
+
+
+service AuthService {
+ rpc DiscordCallBack(.auth.schema.discord_callback.DiscordCallbackRequest) returns (google.protobuf.StringValue) {
+  option (google.api.http) = {
+   get: "/v1/auth/discord/callback"
+  };
+ }
+ rpc ExchangeToken(.auth.schema.token.PostTokenRequest)returns(.auth.schema.token.PostTokenResponse){
+  option (google.api.http) = {
+   post: "/v1/auth/token"
+   body: "*"
+  };
+ }
+ rpc RedirectDiscord(google.protobuf.Empty) returns (google.protobuf.StringValue) {
+  option (google.api.http) = {
+   get: "/v1/auth/discord"
+  };
+ }
+ rpc SignUp(.auth.schema.sign_up.SignUpRequest) returns (proto.schema.users.model.User) {
+  option (google.api.http) = {
+   post: "/v1/auth/sign_up"
+   body: "*"
+  };
+ }
+}

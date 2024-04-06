@@ -1,12 +1,11 @@
 syntax = "proto3";
 
-package proto.schema.users.me.resources;
+package proto.schema.users.model;
 import "proto/third_party/grpc/openapiv2/options/annotations.proto";
 import "proto/third_party/google/api/type/datetime.proto";
-
 option go_package = "./";
 
-message Account {
+message User {
   string id = 1;
   string name = 2;
   string display_name = 3;

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package users.schema.user_id;
+
+option go_package = "./";
+
+// Request type for getting a user.
+message GetUserRequest {
+  string user_id = 1; // Path parameter representing the user's ID
+}
