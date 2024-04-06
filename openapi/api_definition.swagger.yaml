@@ -73,13 +73,14 @@ paths:
       operationId: TagsService_GetTags
       responses:
         "200":
-          description: A successful response.(streaming responses)
+          description: ""
           schema:
-            type: object
-            properties:
-              result:
-                $ref: '#/definitions/tagsmodelTag'
-            title: Stream result of tagsmodelTag
+            type: array
+            items:
+              type: object
+              $ref: '#/definitions/tagsmodelTag'
+            required:
+              - tags
       parameters:
         - name: limit
           in: query
@@ -97,6 +98,78 @@ paths:
           in: query
           required: false
           type: string
+      tags:
+        - TagsService
+    post:
+      operationId: TagsService_PostTag
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/tagsmodelTag'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/tagsPostTagRequest'
+      tags:
+        - TagsService
+  /v1/tags/{tag_id}:
+    get:
+      operationId: TagsService_GetTag
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/tagsmodelTag'
+      parameters:
+        - name: tag_id
+          in: path
+          required: true
+          type: string
+      tags:
+        - TagsService
+    delete:
+      operationId: TagsService_DeleteTag
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/tagsDeleteTagResponse'
+      parameters:
+        - name: tag_id
+          in: path
+          required: true
+          type: string
+      tags:
+        - TagsService
+    put:
+      operationId: TagsService_PutTag
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/tagsmodelTag'
+      parameters:
+        - name: tag_id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            example:
+              color: '#000000'
+              name: updated-example-tag
+              tag_id: tag-123
+            properties:
+              name:
+                type: string
+              color:
+                type: string
       tags:
         - TagsService
   /v1/users:
@@ -226,6 +299,42 @@ definitions:
         type: string
       avatar_url:
         type: string
+  tagsDeleteTagResponse:
+    type: object
+    example:
+      message: ok
+    properties:
+      message:
+        type: string
+    required:
+      - message
+  tagsGetTagsResponse:
+    type: object
+    example:
+      tags:
+        - color: '#FFFFFF'
+          name: example-tag
+          tag_id: tag-123
+    properties:
+      tags:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/tagsmodelTag'
+    required:
+      - tags
+  tagsPostTagRequest:
+    type: object
+    example:
+      color: '#FFFFFF'
+      name: example-tag
+    properties:
+      name:
+        type: string
+      color:
+        type: string
+    required:
+      - name
   tagsmodelTag:
     type: object
     example:
