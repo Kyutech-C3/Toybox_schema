@@ -8,6 +8,7 @@ tags:
   - name: DiscordService
   - name: SignUpService
   - name: DiscordCallbackService
+  - name: UserIdService
   - name: UserService
   - name: MeService
 consumes:
@@ -169,6 +170,42 @@ paths:
           type: string
       tags:
         - TagsService
+  /v1/users:
+    get:
+      operationId: UserService_GetUsers
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/usersGetUsersResponse'
+        "422":
+          description: Validation Error
+          schema: {}
+          examples:
+            application/json:
+              detail:
+                - loc:
+                    - string
+                    - 0
+                  msg: string
+                  type: string
+      parameters:
+        - name: limit
+          description: 'Default value: 30'
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: oldest_user_id
+          in: query
+          required: false
+          type: string
+        - name: newest_user_id
+          in: query
+          required: false
+          type: string
+      tags:
+        - UserService
   /v1/users/@me:
     get:
       operationId: MeService_GetMe
@@ -218,7 +255,7 @@ paths:
         - MeService
   /v1/users/{user_id}:
     get:
-      operationId: UserService_GetUser
+      operationId: UserIdService_GetUser
       responses:
         "200":
           description: A successful response.
@@ -242,7 +279,7 @@ paths:
           required: true
           type: string
       tags:
-        - UserService
+        - UserIdService
 definitions:
   resourcesAccount:
     type: object
@@ -422,3 +459,11 @@ definitions:
     description: |-
       Represents a time zone from the
       [IANA Time Zone Database](https://www.iana.org/time-zones).
+  usersGetUsersResponse:
+    type: object
+    properties:
+      users:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/resourcesAccount'

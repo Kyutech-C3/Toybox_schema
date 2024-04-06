@@ -7,7 +7,7 @@ import "proto/third_party/google/api/annotations.proto";
 
 option go_package = "./";
 
-service UserService {
+service UserIdService {
   rpc GetUser(GetUserRequest)
       returns (proto.schema.users.me.resources.Account) {
     option (google.api.http) = {
