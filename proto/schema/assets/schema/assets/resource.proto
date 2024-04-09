@@ -2,12 +2,12 @@ syntax = "proto3";
 
 package assets.schema.assets;
 
-import "proto/schema/assets/model/model.proto";
+import "proto/schema/assets/model/assets.proto";
 option go_package = "./";
 
 message CreateAssetRequest {
   bytes file = 1;
-  proto.schema.assets.model.AssetType asset_type = 2;
+  .assets.model.AssetType asset_type = 2;
 }
 
 message CreateAssetResponse {

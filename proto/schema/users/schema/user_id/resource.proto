@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package users.schema.user_id;
-import "proto/schema/works/model/model.proto";
+import "proto/schema/works/model/works.proto";
 
 option go_package = "./";
 
@@ -24,9 +24,9 @@ message GetUserFavoritesRequest{
 }
 
 message GetUserWorksResponse{
-  repeated  proto.schema.works.model.Work works = 1;
+  repeated  works.model.Work works = 1;
 }
 
 message GetUserFavoritesResponse{
-  repeated  proto.schema.works.model.Work works = 1;
+  repeated  works.model.Work works = 1;
 }

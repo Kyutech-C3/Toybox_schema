@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package proto.schema.assets;
+package assets;
 
 import "proto/schema/assets/schema/assets/resource.proto";
 import "proto/third_party/google/api/annotations.proto";

@@ -1,13 +1,13 @@
 // proto/schema/users/users.proto
 syntax = "proto3";
 
-package proto.schema.users;
+package users;
 import "proto/third_party/google/api/annotations.proto";
 import "proto/third_party/google/api/wrappers.proto";
 import "proto/schema/auth/schema/discord_callback/resource.proto";
 import "proto/schema/auth/schema/sign_up/resource.proto";
 import "proto/schema/auth/schema/token/resource.proto";
-import "proto/schema/users/model/model.proto";
+import "proto/schema/users/model/users.proto";
 import "google/protobuf/empty.proto";
 option go_package = "./";
 
@@ -29,7 +29,7 @@ service AuthService {
    get: "/api/v1/auth/discord"
   };
  }
- rpc SignUp(.auth.schema.sign_up.SignUpRequest) returns (proto.schema.users.model.User) {
+ rpc SignUp(.auth.schema.sign_up.SignUpRequest) returns (users.model.User) {
   option (google.api.http) = {
    post: "/api/v1/auth/sign_up"
    body: "*"

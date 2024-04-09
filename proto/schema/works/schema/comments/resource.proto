@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package works.schema.comments;
-import "proto/schema/works/model/model.proto";
+import "proto/schema/works/model/works.proto";
 option go_package = "./";
 
 
@@ -30,7 +30,7 @@ message GetReplyCommentsRequest {
 }
 
 message GetCommentsResponse{
-  repeated proto.schema.works.model.Comment comments = 1;
+  repeated works.model.Comment comments = 1;
 }
 
 message DeleteCommentRequest {

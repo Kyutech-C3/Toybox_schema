@@ -4,7 +4,7 @@ package tags.schema.tags;
 
 import "proto/third_party/grpc/openapiv2/options/annotations.proto";
 import "proto/third_party/google/api/field_behavior.proto";
-import "proto/schema/tags/model/model.proto";
+import "proto/schema/tags/model/tags.proto";
 option go_package = "./";
 
 message GetTagsRequest {
@@ -19,7 +19,7 @@ message GetTagsRequest {
 }
 
 message GetTagsResponse{
-  repeated proto.schema.tags.model.Tag tags = 1 [(google.api.field_behavior) = REQUIRED];
+  repeated .tags.model.Tag tags = 1 [(google.api.field_behavior) = REQUIRED];
 
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     example: "{\"tags\": [{\"tag_id\": \"tag-123\", \"name\": \"example-tag\", \"color\": \"#FFFFFF\"}]}"

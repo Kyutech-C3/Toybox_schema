@@ -1,23 +1,23 @@
 // proto/schema/users/users.proto
 syntax = "proto3";
 
-package proto.schema.users;
+package users;
 import "proto/third_party/google/api/annotations.proto";
 import "proto/schema/users/schema/users/resource.proto";
 import "proto/schema/users/schema/user_id/resource.proto";
 import "proto/schema/users/schema/me/resource.proto";
-import "proto/schema/users/model/model.proto";
+import "proto/schema/users/model/users.proto";
 import "google/protobuf/empty.proto";
 option go_package = "./";
 
 
 service UsersService {
-  rpc GetMe(google.protobuf.Empty) returns (proto.schema.users.model.User) {
+  rpc GetMe(google.protobuf.Empty) returns (users.model.User) {
     option (google.api.http) = {
       get : "/api/v1/users/@me"
     };
   };
-  rpc PutMe(.users.schema.me.PutMeRequest) returns (proto.schema.users.model.User) {
+  rpc PutMe(.users.schema.me.PutMeRequest) returns (users.model.User) {
     option (google.api.http) = {
       put : "/api/v1/users/@me"
       body : "*"
@@ -28,7 +28,7 @@ service UsersService {
       get : "/api/v1/users"
     };
   };
-  rpc GetUser(.users.schema.user_id.GetUserRequest) returns (proto.schema.users.model.User) {
+  rpc GetUser(.users.schema.user_id.GetUserRequest) returns (users.model.User) {
     option (google.api.http) = {
       get : "/api/v1/users/{user_id}"
     };
@@ -58,13 +58,13 @@ service UsersService {
     };
   };
 
-  rpc PutMeAvatar(.users.schema.me.PutMeAvatarRequest) returns (proto.schema.users.model.User) {
+  rpc PutMeAvatar(.users.schema.me.PutMeAvatarRequest) returns (users.model.User) {
     option (google.api.http) = {
       put : "/api/v1/users/@me/avatar"
       body : "*"
     };
   };
-  rpc DeleteMeAvatar(google.protobuf.Empty) returns (proto.schema.users.model.User) {
+  rpc DeleteMeAvatar(google.protobuf.Empty) returns (users.model.User) {
     option (google.api.http) = {
       delete : "/api/v1/users/@me/avatar"
     };

@@ -3,7 +3,7 @@ syntax = "proto3";
 package users.schema.me;
 
 import "proto/third_party/grpc/openapiv2/options/annotations.proto";
-import "proto/schema/works/model/model.proto";
+import "proto/schema/works/model/works.proto";
 
 option go_package = "./";
 
@@ -38,9 +38,9 @@ message GetMeWorksRequest{
 }
 
 message GetMeWorksResponse{
-  repeated  proto.schema.works.model.Work works = 1;
+  repeated  works.model.Work works = 1;
 }
 
 message GetMeFavoritesResponse{
-  repeated  proto.schema.works.model.Work works = 1;
+  repeated  works.model.Work works = 1;
 }

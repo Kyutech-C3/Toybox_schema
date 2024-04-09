@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package works.schema.works;
-import "proto/schema/works/model/model.proto";
+import "proto/schema/works/model/works.proto";
 import "proto/third_party/grpc/openapiv2/options/annotations.proto";
 import "proto/third_party/google/api/field_behavior.proto";
 option go_package = "./";
@@ -31,7 +31,7 @@ message CreateWorkRequest {
   };
 }
 message GetWorksResponse {
-  repeated proto.schema.works.model.Work works = 1;
+  repeated .works.model.Work works = 1;
 }
 
 message GetWorksRequest {

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package users.schema.users;
 
-import "proto/schema/users/model/model.proto";
+import "proto/schema/users/model/users.proto";
 import "proto/third_party/google/api/wrappers.proto";
 
 option go_package = "./";
@@ -15,6 +15,6 @@ message GetUsersRequest {
 }
 
 message GetUsersResponse {
-  repeated proto.schema.users.model.User users = 1;
+  repeated .users.model.User users = 1;
 }
 

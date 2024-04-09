@@ -1,9 +1,8 @@
 syntax = "proto3";
 
 package works.schema.favorite;
-import "proto/schema/works/model/model.proto";
-import "proto/schema/users/model/model.proto";
-import "google/protobuf/timestamp.proto";
+import "proto/schema/works/model/works.proto";
+import "proto/schema/users/model/users.proto";
 
 option go_package = "./";
 
@@ -11,9 +10,9 @@ message GetWorkFavoriteRequest {
   string work_id = 1;
 }
 message GetWorkFavoriteResponseItem{
-  proto.schema.works.model.Work work =1;
-  proto.schema.users.model.User user =2;
-  google.protobuf.Timestamp created_at = 3;
+  works.model.Work work =1;
+  users.model.User user =2;
+  string created_at = 3;
 }
 message GetWorkFavoriteResponse {
   repeated GetWorkFavoriteResponseItem favorites = 1;

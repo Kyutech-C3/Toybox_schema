@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package proto.schema.users;
+package users;
 import "proto/schema/tags/schema/tags/resource.proto";
-import "proto/schema/tags/model/model.proto";
+import "proto/schema/tags/model/tags.proto";
 import "proto/third_party/google/api/annotations.proto";
 
 option go_package = "./";
@@ -17,20 +17,20 @@ service TagsService {
   };
 
 
-  rpc PostTag(.tags.schema.tags.PostTagRequest) returns (proto.schema.tags.model.Tag) {
+  rpc PostTag(.tags.schema.tags.PostTagRequest) returns (tags.model.Tag) {
     option (google.api.http) = {
       post: "/api/v1/tags"
       body: "*"
     };
   }
 
-  rpc GetTag(.tags.schema.tags.GetTagRequest) returns (proto.schema.tags.model.Tag) {
+  rpc GetTag(.tags.schema.tags.GetTagRequest) returns (tags.model.Tag) {
     option (google.api.http) = {
       get: "/api/v1/tags/{tag_id}"
     };
   }
 
-  rpc PutTag(.tags.schema.tags.PutTagRequest) returns (proto.schema.tags.model.Tag) {
+  rpc PutTag(.tags.schema.tags.PutTagRequest) returns (tags.model.Tag) {
     option (google.api.http) = {
       put: "/api/v1/tags/{tag_id}"
       body: "*"

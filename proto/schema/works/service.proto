@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package proto.schema.works;
+package works;
 
 import "google/protobuf/empty.proto";
 import "proto/schema/works/schema/works/resource.proto";
 import "proto/schema/works/schema/comments/resource.proto";
 import "proto/schema/works/schema/favorite/resource.proto";
-import "proto/schema/works/model/model.proto";
+import "proto/schema/works/model/works.proto";
 import "proto/third_party/google/api/annotations.proto";
 
 
@@ -19,7 +19,7 @@ service WorksService {
     };
   }
 
-  rpc CreateWork(.works.schema.works.CreateWorkRequest) returns (proto.schema.works.model.Work) {
+  rpc CreateWork(.works.schema.works.CreateWorkRequest) returns (works.model.Work) {
     option (google.api.http) = {
       post: "/api/v1/works"
       body: "*"
@@ -27,13 +27,13 @@ service WorksService {
 
   }
 
-  rpc GetWork(.works.schema.works.GetWorkRequest) returns (proto.schema.works.model.Work) {
+  rpc GetWork(.works.schema.works.GetWorkRequest) returns (works.model.Work) {
     option (google.api.http) = {
       get: "/api/v1/works/{work_id}"
     };
   }
 
-  rpc UpdateWork(.works.schema.works.UpdateWorkRequest) returns (proto.schema.works.model.Work) {
+  rpc UpdateWork(.works.schema.works.UpdateWorkRequest) returns (works.model.Work) {
     option (google.api.http) = {
       put: "/api/v1/works/{work_id}"
       body: "*"
