@@ -3,13 +3,12 @@ syntax = "proto3";
 package users.schema.users;
 
 import "proto/schema/users/model/users.proto";
-import "proto/third_party/google/api/wrappers.proto";
 
 option go_package = "./";
 
 message GetUsersRequest {
   // Default value: 30
-  google.protobuf.Int32Value limit = 1;
+  int32 limit = 1;
   string oldest_user_id = 2;
   string newest_user_id = 3;
 }
