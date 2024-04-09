@@ -4,6 +4,7 @@ PROTO_FILES = $(shell find ./proto/schema -name "*.proto"  -type f)
 build:
 	rm -rf openapi
 	mkdir openapi
+	protoc -I. --plugin=./protoc-plugin/protoc-gen-ts-msw-handlers/protoc-gen-ts-msw-handlers --ts-msw-handlers_out=./msw ./proto/schema/**/*.proto
 	protoc -I . --openapiv2_out openapi --openapiv2_opt logtostderr=true \
 	--openapiv2_opt disable_default_errors=true \
 	--openapiv2_opt allow_merge=true \
