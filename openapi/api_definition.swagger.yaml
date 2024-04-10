@@ -378,7 +378,7 @@ paths:
           in: path
           required: true
           type: string
-        - name: vislibility
+        - name: visibility
           in: query
           required: false
           type: string
@@ -835,12 +835,13 @@ definitions:
   modelAssetType:
     type: string
     enum:
+      - UNKNOWN
       - zip
       - image
       - video
       - music
       - model
-    default: zip
+    default: UNKNOWN
   modelComment:
     type: object
     properties:

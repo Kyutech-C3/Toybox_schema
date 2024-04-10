@@ -10,8 +10,8 @@ const ApiV1AuthDiscordCallbackGetHandler = http.get('/api/v1/auth/discord/callba
 const ApiV1AuthTokenPostHandler = http.post('/api/v1/auth/token',() => {
   return new HttpResponse.json({
     expired_at:'',
-    refresh_token:'dnw|kktfpit',
-    access_token:'dnw|kktfpit',
+    refresh_token:'emoyic',
+    access_token:'emoyic',
   })
 })
 const ApiV1AuthDiscordGetHandler = http.get('/api/v1/auth/discord',() => {
@@ -21,13 +21,13 @@ const ApiV1AuthDiscordGetHandler = http.get('/api/v1/auth/discord',() => {
 })
 const ApiV1AuthSignUpPostHandler = http.post('/api/v1/auth/sign_up',() => {
   return new HttpResponse.json({
-    id:'55e4ed18-4fae-4382-a4fd-bb145159db0b',
-    name:'Darien Miller',
-    display_name:'Darien Miller',
-    avatar_url:'https://www.nnk.info/j-fxkra',
-    profile:'recusandae a sit vel a rerum nulla vero itaque aut est necessitatibus rerum ea facilis rerum omnis omnis voluptas omnis inventore excepturi atque fugit quod aut quisquam repellendus dicta ut amet nihil impedit magni saepe quia maxime necessitatibus non cumque.',
-    twitter_id:'4bde3946-e972-43d8-92c7-cb6b2ca8b90b',
-    github_id:'8c7bb11d-9d80-4d8b-b98b-ffa2c1d515c4',
+    id:'ced8594e-320f-4c52-928f-ccc826895420',
+    name:'Heloise Predovic',
+    display_name:'Heloise Predovic',
+    avatar_url:'http://iem.com/',
+    profile:'vel dolor occaecati ut et iste tempora fugit blanditiis soluta totam quibusdam asperiores ut et architecto maiores earum quo eius minima est modi sunt iste qui est dolore commodi reprehenderit omnis qui similique quia sed ut autem inventore in dolorem.',
+    twitter_id:'4fc78961-650c-4fe0-aaf2-0c774aa75f38',
+    github_id:'5215c9bc-1222-4a8c-ad65-0e2b42183276',
     created_at:'2021-09-01T00:00:00Z',
     updated_at:'2021-09-01T00:00:00Z',
   })

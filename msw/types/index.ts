@@ -9,7 +9,7 @@ export type User = {
   createdAt: string;
   updatedAt: string;
 }
-export type AssetType = 'zip' | 'image' | 'video' | 'music' | 'model' ;
+export type AssetType = 'UNKNOWN' | 'zip' | 'image' | 'video' | 'music' | 'model' ;
 export type Asset = {
   id: string;
   assetType: AssetType;
@@ -135,7 +135,7 @@ export type GetUserRequest = {
 }
 export type GetUserWorksRequest = {
   userId: string;
-  vislibility: string;
+  visibility: string;
   newestUserId: string;
   oldestUserId: string;
   tags: string;

@@ -6,32 +6,47 @@ const ApiV1TagsGetHandler = http.get('/api/v1/tags',() => {
   return new HttpResponse.json({
     tags:[
     {
-    id:'99364ce4-5bfb-4826-97c3-0b88c4ff2bf5',
-    name:'Darien Miller',
-    color:'#6BFAB2',
+    id:'9ec065d7-ab2f-451e-9b21-39e899ea77aa',
+    name:'Heloise Predovic',
+    color:'#94088E',
+    },
+    {
+    id:'e178aeba-27bd-4a24-ae7c-8ebb1e1f3f35',
+    name:'Heloise Predovic',
+    color:'#94088E',
+    },
+    {
+    id:'2d06ec0b-2f3e-4b7a-8450-79115a1fec25',
+    name:'Heloise Predovic',
+    color:'#94088E',
+    },
+    {
+    id:'66eff262-3d7d-4a08-aeea-e0e346f08833',
+    name:'Heloise Predovic',
+    color:'#94088E',
     },
     ],
   })
 })
 const ApiV1TagsPostHandler = http.post('/api/v1/tags',() => {
   return new HttpResponse.json({
-    id:'8644eed3-20be-46d6-818e-d483ea76ea3e',
-    name:'Darien Miller',
-    color:'#6BFAB2',
+    id:'fd116a3e-e828-4134-89b1-de817a3ed2ee',
+    name:'Heloise Predovic',
+    color:'#94088E',
   })
 })
 const ApiV1TagsTagIdGetHandler = http.get('/api/v1/tags/{tag_id}',() => {
   return new HttpResponse.json({
-    id:'bb825d93-3432-47b9-8101-c812d8c51dd4',
-    name:'Darien Miller',
-    color:'#6BFAB2',
+    id:'92799828-4f9a-4f98-8221-bb51f8c95649',
+    name:'Heloise Predovic',
+    color:'#94088E',
   })
 })
 const ApiV1TagsTagIdPutHandler = http.put('/api/v1/tags/{tag_id}',() => {
   return new HttpResponse.json({
-    id:'60ece3a5-0c6c-4591-a08b-90e4823e1822',
-    name:'Darien Miller',
-    color:'#6BFAB2',
+    id:'cd5c98b7-2e14-4c53-b7f9-ab2537affdd4',
+    name:'Heloise Predovic',
+    color:'#94088E',
   })
 })
 const ApiV1TagsTagIdDeleteHandler = http.delete('/api/v1/tags/{tag_id}',() => {
