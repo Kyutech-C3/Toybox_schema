@@ -12,7 +12,7 @@ message GetUserRequest {
 
 message GetUserWorksRequest{
   string user_id = 1;
-  string vislibility = 2;
+  string visibility = 2;
   string newest_user_id = 3;
   string oldest_user_id = 4;
   string tags = 5;
