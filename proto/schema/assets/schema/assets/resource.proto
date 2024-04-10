@@ -10,14 +10,8 @@ message CreateAssetRequest {
   .assets.model.AssetType asset_type = 2;
 }
 
-message CreateAssetResponse {
-  string id = 1;
-}
+message CreateAssetResponse { string id = 1; }
 
-message DeleteAssetRequest {
-  string id = 1;
-}
+message DeleteAssetRequest { string id = 1; }
 
-message DeleteAssetResponse {
-  string status =1;
-}
+message DeleteAssetResponse { string status = 1; }

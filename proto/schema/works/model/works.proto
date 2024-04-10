@@ -8,7 +8,6 @@ import "proto/schema/assets/model/assets.proto";
 
 option go_package = "./";
 
-
 message Url {
   string url = 1;
   string url_type = 2;

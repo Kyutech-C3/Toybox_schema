@@ -9,87 +9,93 @@ import "proto/schema/works/schema/favorite/resource.proto";
 import "proto/schema/works/model/works.proto";
 import "proto/third_party/google/api/annotations.proto";
 
-
 option go_package = "./";
 
 service WorksService {
-  rpc GetWorks(.works.schema.works.GetWorksRequest) returns (.works.schema.works.GetWorksResponse) {
+  rpc GetWorks(.works.schema.works.GetWorksRequest)
+      returns (.works.schema.works.GetWorksResponse) {
     option (google.api.http) = {
-      get: "/api/v1/works"
+      get : "/api/v1/works"
     };
   }
 
-  rpc CreateWork(.works.schema.works.CreateWorkRequest) returns (works.model.Work) {
+  rpc CreateWork(.works.schema.works.CreateWorkRequest)
+      returns (works.model.Work) {
     option (google.api.http) = {
-      post: "/api/v1/works"
-      body: "*"
+      post : "/api/v1/works"
+      body : "*"
     };
-
   }
 
   rpc GetWork(.works.schema.works.GetWorkRequest) returns (works.model.Work) {
     option (google.api.http) = {
-      get: "/api/v1/works/{work_id}"
+      get : "/api/v1/works/{work_id}"
     };
   }
 
-  rpc UpdateWork(.works.schema.works.UpdateWorkRequest) returns (works.model.Work) {
+  rpc UpdateWork(.works.schema.works.UpdateWorkRequest)
+      returns (works.model.Work) {
     option (google.api.http) = {
-      put: "/api/v1/works/{work_id}"
-      body: "*"
+      put : "/api/v1/works/{work_id}"
+      body : "*"
     };
   }
 
-  rpc DeleteWork(.works.schema.works.DeleteWorkRequest) returns (google.protobuf.Empty) {
+  rpc DeleteWork(.works.schema.works.DeleteWorkRequest)
+      returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/api/v1/works/{work_id}"
+      delete : "/api/v1/works/{work_id}"
     };
   }
-  rpc CreateComment(.works.schema.comments.PostCommentRequest) returns (model.Comment) {
+  rpc CreateComment(.works.schema.comments.PostCommentRequest)
+      returns (model.Comment) {
     option (google.api.http) = {
-      post: "/api/v1/works/{work_id}/comments"
-      body: "*"
-    };
-  }
-
-
-  rpc DeleteComment(.works.schema.comments.DeleteCommentRequest) returns (google.protobuf.Empty) {
-    option (google.api.http) = {
-      delete: "/api/v1/works/{work_id}/comments/{comment_id}"
+      post : "/api/v1/works/{work_id}/comments"
+      body : "*"
     };
   }
 
-
-  rpc GetComments(.works.schema.comments.GetCommentsRequest) returns (.works.schema.comments.GetCommentsResponse) {
+  rpc DeleteComment(.works.schema.comments.DeleteCommentRequest)
+      returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      get: "/api/v1/works/{work_id}/comments"
+      delete : "/api/v1/works/{work_id}/comments/{comment_id}"
     };
   }
 
-
-  rpc GetReplyComments(.works.schema.comments.GetReplyCommentsRequest) returns (.works.schema.comments.GetCommentsResponse) {
+  rpc GetComments(.works.schema.comments.GetCommentsRequest)
+      returns (.works.schema.comments.GetCommentsResponse) {
     option (google.api.http) = {
-      get: "/api/v1/works/{work_id}/comments/{comment_id}"
-      response_body: "comments"
+      get : "/api/v1/works/{work_id}/comments"
     };
   }
 
-  rpc GetWorkFavorite(.works.schema.favorite.GetWorkFavoriteRequest) returns (.works.schema.favorite.GetWorkFavoriteResponse) {
+  rpc GetReplyComments(.works.schema.comments.GetReplyCommentsRequest)
+      returns (.works.schema.comments.GetCommentsResponse) {
     option (google.api.http) = {
-      get: "/api/v1/works/{work_id}/favorite"
+      get : "/api/v1/works/{work_id}/comments/{comment_id}"
+      response_body : "comments"
     };
   }
 
-  rpc CreateWorkFavorite(.works.schema.favorite.PostWorkFavoriteRequest) returns (.works.schema.favorite.PostWorkFavoriteResponse) {
+  rpc GetWorkFavorite(.works.schema.favorite.GetWorkFavoriteRequest)
+      returns (.works.schema.favorite.GetWorkFavoriteResponse) {
     option (google.api.http) = {
-      post: "/api/v1/works/{work_id}/favorite"
-      body: "*"
+      get : "/api/v1/works/{work_id}/favorite"
     };
   }
 
-  rpc DeleteWorkFavorite(.works.schema.favorite.DeleteWorkFavoriteRequest) returns (.works.schema.favorite.DeleteWorkFavoriteResponse) {
+  rpc CreateWorkFavorite(.works.schema.favorite.PostWorkFavoriteRequest)
+      returns (.works.schema.favorite.PostWorkFavoriteResponse) {
     option (google.api.http) = {
-      delete: "/api/v1/works/{work_id}/favorite"
+      post : "/api/v1/works/{work_id}/favorite"
+      body : "*"
+    };
+  }
+
+  rpc DeleteWorkFavorite(.works.schema.favorite.DeleteWorkFavoriteRequest)
+      returns (.works.schema.favorite.DeleteWorkFavoriteResponse) {
+    option (google.api.http) = {
+      delete : "/api/v1/works/{work_id}/favorite"
     };
   }
 }

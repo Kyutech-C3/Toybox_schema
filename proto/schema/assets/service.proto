@@ -8,17 +8,18 @@ import "proto/third_party/google/api/annotations.proto";
 option go_package = "./";
 
 service AssetsService {
-  rpc CreateAsset(.assets.schema.assets.CreateAssetRequest) returns (.assets.schema.assets.CreateAssetResponse) {
+  rpc CreateAsset(.assets.schema.assets.CreateAssetRequest)
+      returns (.assets.schema.assets.CreateAssetResponse) {
     option (google.api.http) = {
-      post: "/api/v1/assets"
-      body: "*"
+      post : "/api/v1/assets"
+      body : "*"
     };
   }
 
-  rpc DeleteAsset(.assets.schema.assets.DeleteAssetRequest) returns (.assets.schema.assets.DeleteAssetResponse) {
+  rpc DeleteAsset(.assets.schema.assets.DeleteAssetRequest)
+      returns (.assets.schema.assets.DeleteAssetResponse) {
     option (google.api.http) = {
-      delete: "/api/v1/assets/{id}"
+      delete : "/api/v1/assets/{id}"
     };
   }
 }
-

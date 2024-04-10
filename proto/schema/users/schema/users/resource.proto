@@ -13,7 +13,4 @@ message GetUsersRequest {
   string newest_user_id = 3;
 }
 
-message GetUsersResponse {
-  repeated .users.model.User users = 1;
-}
-
+message GetUsersResponse { repeated .users.model.User users = 1; }

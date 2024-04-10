@@ -10,6 +10,6 @@ message Tag {
   string name = 2;
   string color = 3;
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    example:"{ \"id\": \"1\", \"name\": \"tag1\", \"color\": \"#000000\" }"
+    example : "{ \"id\": \"1\", \"name\": \"tag1\", \"color\": \"#000000\" }"
   };
 }

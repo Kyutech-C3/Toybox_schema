@@ -10,7 +10,7 @@ message GetUserRequest {
   string user_id = 1; // Path parameter representing the user's ID
 }
 
-message GetUserWorksRequest{
+message GetUserWorksRequest {
   string user_id = 1;
   string visibility = 2;
   string newest_user_id = 3;
@@ -19,14 +19,8 @@ message GetUserWorksRequest{
   int32 limit = 6;
 }
 
-message GetUserFavoritesRequest{
-  string user_id = 1;
-}
+message GetUserFavoritesRequest { string user_id = 1; }
 
-message GetUserWorksResponse{
-  repeated  works.model.Work works = 1;
-}
+message GetUserWorksResponse { repeated works.model.Work works = 1; }
 
-message GetUserFavoritesResponse{
-  repeated  works.model.Work works = 1;
-}
+message GetUserFavoritesResponse { repeated works.model.Work works = 1; }

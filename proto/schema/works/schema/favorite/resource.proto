@@ -6,12 +6,10 @@ import "proto/schema/users/model/users.proto";
 
 option go_package = "./";
 
-message GetWorkFavoriteRequest {
-  string work_id = 1;
-}
-message GetWorkFavoriteResponseItem{
-  works.model.Work work =1;
-  users.model.User user =2;
+message GetWorkFavoriteRequest { string work_id = 1; }
+message GetWorkFavoriteResponseItem {
+  works.model.Work work = 1;
+  users.model.User user = 2;
   string created_at = 3;
 }
 message GetWorkFavoriteResponse {
@@ -20,9 +18,7 @@ message GetWorkFavoriteResponse {
   int32 favorite_count = 3;
 }
 
-message PostWorkFavoriteRequest {
-  string work_id = 1;
-}
+message PostWorkFavoriteRequest { string work_id = 1; }
 
 message PostWorkFavoriteResponse {
   repeated GetWorkFavoriteResponseItem favorites = 1;
@@ -30,9 +26,7 @@ message PostWorkFavoriteResponse {
   int32 favorite_count = 3;
 }
 
-message DeleteWorkFavoriteRequest {
-  string work_id = 1;
-}
+message DeleteWorkFavoriteRequest { string work_id = 1; }
 
 message DeleteWorkFavoriteResponse {
   repeated GetWorkFavoriteResponseItem favorites = 1;

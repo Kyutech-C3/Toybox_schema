@@ -8,63 +8,65 @@ import "proto/schema/tags/model/tags.proto";
 option go_package = "./";
 
 message GetTagsRequest {
-  string limit = 1 [(google.api.field_behavior) = OPTIONAL];
-  string smallest_tag_id = 2 [(google.api.field_behavior) = OPTIONAL];
-  string biggest_tag_id = 3 [(google.api.field_behavior) = OPTIONAL];
-  string w = 4 [(google.api.field_behavior) = OPTIONAL];
+  string limit = 1 [ (google.api.field_behavior) = OPTIONAL ];
+  string smallest_tag_id = 2 [ (google.api.field_behavior) = OPTIONAL ];
+  string biggest_tag_id = 3 [ (google.api.field_behavior) = OPTIONAL ];
+  string w = 4 [ (google.api.field_behavior) = OPTIONAL ];
 
-  option(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    example: "{\"limit\": 100, \"smallest_tag_id\": \"\", \"biggest_tag_id\": \"\", \"w\": \"\"}"
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example : "{\"limit\": 100, \"smallest_tag_id\": \"\", \"biggest_tag_id\": "
+              "\"\", \"w\": \"\"}"
   };
 }
 
-message GetTagsResponse{
-  repeated .tags.model.Tag tags = 1 [(google.api.field_behavior) = REQUIRED];
+message GetTagsResponse {
+  repeated .tags.model.Tag tags = 1 [ (google.api.field_behavior) = REQUIRED ];
 
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    example: "{\"tags\": [{\"tag_id\": \"tag-123\", \"name\": \"example-tag\", \"color\": \"#FFFFFF\"}]}"
+    example : "{\"tags\": [{\"tag_id\": \"tag-123\", \"name\": "
+              "\"example-tag\", \"color\": \"#FFFFFF\"}]}"
   };
-
 }
 
 message PostTagRequest {
-  string name = 1 [(google.api.field_behavior) = REQUIRED];
-  string color = 2 [(google.api.field_behavior) = OPTIONAL];
+  string name = 1 [ (google.api.field_behavior) = REQUIRED ];
+  string color = 2 [ (google.api.field_behavior) = OPTIONAL ];
 
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    example: "{\"name\": \"example-tag\", \"color\": \"#FFFFFF\"}"
+    example : "{\"name\": \"example-tag\", \"color\": \"#FFFFFF\"}"
   };
 }
 
 message GetTagRequest {
-  string tag_id = 1 [(google.api.field_behavior) = REQUIRED];
+  string tag_id = 1 [ (google.api.field_behavior) = REQUIRED ];
 
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    example: "{\"tag_id\": \"tag-123\"}"
+    example : "{\"tag_id\": \"tag-123\"}"
   };
 }
 message PutTagRequest {
-  string tag_id = 1 [(google.api.field_behavior) = REQUIRED];
-  string name = 2 [(google.api.field_behavior) = OPTIONAL];
-  string color = 3 [(google.api.field_behavior) = OPTIONAL];
+  string tag_id = 1 [ (google.api.field_behavior) = REQUIRED ];
+  string name = 2 [ (google.api.field_behavior) = OPTIONAL ];
+  string color = 3 [ (google.api.field_behavior) = OPTIONAL ];
 
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    example: "{\"tag_id\": \"tag-123\", \"name\": \"updated-example-tag\", \"color\": \"#000000\"}"
+    example : "{\"tag_id\": \"tag-123\", \"name\": \"updated-example-tag\", "
+              "\"color\": \"#000000\"}"
   };
 }
 
 message DeleteTagRequest {
-  string tag_id = 1 [(google.api.field_behavior) = REQUIRED];
+  string tag_id = 1 [ (google.api.field_behavior) = REQUIRED ];
 
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    example: "{\"tag_id\": \"tag-123\"}"
+    example : "{\"tag_id\": \"tag-123\"}"
   };
 }
 
 message DeleteTagResponse {
-  string message = 1 [(google.api.field_behavior) = REQUIRED];
+  string message = 1 [ (google.api.field_behavior) = REQUIRED ];
 
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    example: "{\"message\": \"ok\"}"
+    example : "{\"message\": \"ok\"}"
   };
 }
