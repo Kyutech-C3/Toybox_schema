@@ -6,11 +6,12 @@ import "proto/schema/users/model/users.proto";
 
 option go_package = "./";
 enum AssetType {
-  zip = 0;
-  image = 1;
-  video = 2;
-  music = 3;
-  model = 4;
+  UNKNOWN = 0;
+  zip = 1;
+  image = 2;
+  video = 3;
+  music = 4;
+  model = 5;
 }
 message Asset {
   string id = 1;
