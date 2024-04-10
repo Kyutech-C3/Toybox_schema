@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+package works.schema.works;
+import "proto/schema/works/model/works.proto";
+import "proto/third_party/grpc/openapiv2/options/annotations.proto";
+import "proto/third_party/google/api/field_behavior.proto";
+option go_package = "./";
+
+message CreateWorkRequest {
+  string title = 1 [ (google.api.field_behavior) = REQUIRED ];
+  string description = 2 [ (google.api.field_behavior) = REQUIRED ];
+  string visibility = 3 [ (google.api.field_behavior) = REQUIRED ];
+  string thumbnail_asset_id = 4 [ (google.api.field_behavior) = REQUIRED ];
+  repeated string assets_id = 5 [ (google.api.field_behavior) = REQUIRED ];
+  repeated UrlInfo urls = 6 [
+    (google.api.field_behavior) = REQUIRED
+  ]; // URL情報はスキーマによって異なるため、具体的な構造を確認する必要があります。
+  repeated string tags_id = 7 [ (google.api.field_behavior) = REQUIRED ];
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example : "{"
+              "\"title\": \"Amazing Artwork\","
+              "\"description\": \"This is a detailed description of the "
+              "artwork.\","
+              "\"visibility\": \"public\","
+              "\"thumbnail_asset_id\": \"asset123\","
+              "\"assets_id\": [\"asset124\", \"asset125\"],"
+              "\"urls\": ["
+              "  {\"url\": \"http://example.com/artwork1\", \"url_type\": "
+              "\"portfolio\"},"
+              "  {\"url\": \"http://example.com/artwork2\", \"url_type\": "
+              "\"video\"}"
+              "],"
+              "\"tags_id\": [\"tag1\", \"tag2\"]"
+              "}"
+  };
+}
+message GetWorksResponse { repeated .works.model.Work works = 1; }
+
+message GetWorksRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string visibility = 3;
+  string tag_names = 4;
+  string tag_ids = 5;
+  string search_word = 6;
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example : "{"
+              "\"limit\": 10,"
+              "\"visibility\": \"public\","
+              "\"tag_names\": \"tag1,tag2\","
+              "\"tag_ids\": \"id1,id2\","
+              "\"search_word\": \"artwork\""
+              "}"
+  };
+}
+
+message GetWorkRequest {
+  string work_id = 1;
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example : "{"
+              "\"work_id\": \"work123\""
+              "}"
+  };
+}
+
+message DeleteWorkRequest {
+  string work_id = 1;
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example : "{"
+              "\"work_id\": \"work123\""
+              "}"
+  };
+}
+message UpdateWorkRequest {
+  string work_id = 1
+      [ (google.api.field_behavior) = REQUIRED ]; // Work ID to update
+  string title = 2
+      [ (google.api.field_behavior) = OPTIONAL ]; // New title for the work
+  string description = 3
+      [ (google.api.field_behavior) = OPTIONAL ]; // New description
+  string visibility = 4
+      [ (google.api.field_behavior) = OPTIONAL ]; // New visibility setting
+  string thumbnail_asset_id = 5
+      [ (google.api.field_behavior) =
+            OPTIONAL ]; // ID for the new thumbnail asset
+  repeated string assets_id = 6
+      [ (google.api.field_behavior) =
+            OPTIONAL ]; // IDs for new or additional assets
+  repeated UrlInfo urls = 7
+      [ (google.api.field_behavior) =
+            OPTIONAL ]; // New or updated URLs associated with the work
+  repeated string tags_id = 8
+      [ (google.api.field_behavior) =
+            OPTIONAL ]; // IDs for new or updated tags associated with the work
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example : "{"
+              "\"work_id\": \"work-123\","
+              "\"title\": \"Updated Artwork Title\","
+              "\"description\": \"This is an updated description of the "
+              "artwork.\","
+              "\"visibility\": \"public\","
+              "\"thumbnail_asset_id\": \"asset-456\","
+              "\"assets_id\": [\"asset-789\", \"asset-101\"],"
+              "\"urls\": ["
+              "  {\"url\": \"http://example.com/artwork1\", \"url_type\": "
+              "\"portfolio\"},"
+              "  {\"url\": \"http://example.com/artwork2\", \"url_type\": "
+              "\"video\"}"
+              "],"
+              "\"tags_id\": [\"tag-123\", \"tag-456\"]"
+              "}"
+  };
+}
+
+message UrlInfo {
+  string url = 1;      // The URL
+  string url_type = 2; // The type of the URL, e.g., "portfolio" or "video"
+}

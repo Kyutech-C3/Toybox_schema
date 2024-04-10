@@ -1,6 +1,4 @@
 syntax = "proto3";
 
-package proto.schema.error;
+package error;
 option go_package = "./";
-
-

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package assets;
+
+import "proto/schema/assets/schema/assets/resource.proto";
+import "proto/third_party/google/api/annotations.proto";
+
+option go_package = "./";
+
+service AssetsService {
+  rpc CreateAsset(.assets.schema.assets.CreateAssetRequest)
+      returns (.assets.schema.assets.CreateAssetResponse) {
+    option (google.api.http) = {
+      post : "/api/v1/assets"
+      body : "*"
+    };
+  }
+
+  rpc DeleteAsset(.assets.schema.assets.DeleteAssetRequest)
+      returns (.assets.schema.assets.DeleteAssetResponse) {
+    option (google.api.http) = {
+      delete : "/api/v1/assets/{id}"
+    };
+  }
+}

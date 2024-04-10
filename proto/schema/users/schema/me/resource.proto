@@ -3,9 +3,9 @@ syntax = "proto3";
 package users.schema.me;
 
 import "proto/third_party/grpc/openapiv2/options/annotations.proto";
+import "proto/schema/works/model/works.proto";
 
 option go_package = "./";
-
 
 message PutMeRequest {
   string display_name = 1;
@@ -22,3 +22,17 @@ message PutMeRequest {
               "}"
   };
 }
+
+message PutMeAvatarRequest { string file = 1; }
+
+message GetMeWorksRequest {
+  string visibility = 1;
+  string oldest_user_id = 2;
+  string newest_user_id = 3;
+  string tags = 4;
+  int32 limit = 5;
+}
+
+message GetMeWorksResponse { repeated works.model.Work works = 1; }
+
+message GetMeFavoritesResponse { repeated works.model.Work works = 1; }

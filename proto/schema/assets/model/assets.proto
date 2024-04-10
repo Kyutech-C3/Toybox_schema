@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package assets.model;
+
+import "proto/schema/users/model/users.proto";
+
+option go_package = "./";
+enum AssetType {
+  UNKNOWN = 0;
+  zip = 1;
+  image = 2;
+  video = 3;
+  music = 4;
+  model = 5;
+}
+message Asset {
+  string id = 1;
+  AssetType asset_type = 2;
+  users.model.User user = 3;
+  string extension = 4;
+  string url = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}

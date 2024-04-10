@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package assets.schema.assets;
+
+import "proto/schema/assets/model/assets.proto";
+option go_package = "./";
+
+message CreateAssetRequest {
+  bytes file = 1;
+  .assets.model.AssetType asset_type = 2;
+}
+
+message CreateAssetResponse { string id = 1; }
+
+message DeleteAssetRequest { string id = 1; }
+
+message DeleteAssetResponse { string status = 1; }
