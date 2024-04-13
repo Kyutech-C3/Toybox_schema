@@ -1,15 +1,12 @@
 PROTO_FILES = $(shell find ./proto/schema -name "*.proto"  -type f)
 
-.PHONY: build clean new fmt setup-mac setup-linux build-openapi build-msw
+.PHONY: build clean new fmt setup-mac setup-linux build-openapi
 build:
 	$(MAKE) build-openapi
-	$(MAKE) build-msw
 
 clean:
 	rm -rf openapi
-	rm -rf msw
 	mkdir openapi
-	mkdir msw
 
 build-openapi:
 	rm -rf openapi
@@ -21,11 +18,6 @@ build-openapi:
 	--openapiv2_opt merge_file_name="api_definition.yml" $(PROTO_FILES) \
 	--openapiv2_opt allow_delete_body=true \
 	--openapiv2_opt json_names_for_fields=false
-
-build-msw:
-	rm -rf msw
-	mkdir msw
-	protoc -I. --plugin=./protoc-plugin/protoc-gen-ts-msw-handlers/protoc-gen-ts-msw-handlers --ts-msw-handlers_out=./msw ./proto/schema/**/*.proto
 
 new:
 	npx scaffdog generate service --output ./proto/schema

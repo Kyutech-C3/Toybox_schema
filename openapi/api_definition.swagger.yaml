@@ -1108,6 +1108,9 @@ definitions:
         items:
           type: object
           $ref: '#/definitions/modelWork'
+      works_total_count:
+        type: integer
+        format: int32
   worksUrlInfo:
     type: object
     properties:

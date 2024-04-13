@@ -35,7 +35,7 @@ message CreateWorkRequest {
               "}"
   };
 }
-message GetWorksResponse { repeated .works.model.Work works = 1; }
+message GetWorksResponse { repeated .works.model.Work works = 1; int32 works_total_count= 2;}
 
 message GetWorksRequest {
   int32 page = 1;
